@@ -8,22 +8,22 @@ import geb.spock.GebReportingSpec
  */
 class RestartBrowserIT extends GebReportingSpec {
   def "Search web site Scrum-Master.de"() {
-    when:
+    when:_ "download page is opened"
     go "https://scrum-master.de"
     report "welcome page"
 
-    then:
+    then:_ "expected text is found on page"
     $("h2").text().startsWith("Herzlich Willkommen bei Scrum-Master.de")
 
-    when: "browser is reset"
+    when:_ "browser is reset"
     resetBrowser()
     CachingDriverFactory.clearCacheAndQuitDriver()
 
-    and: "download page is opened in new browser"
+    and:_ "download page is opened again in new browser"
     go "https://scrum-master.de/Downloads"
     report "download page"
 
-    then: "expected text is found on page"
+    then:_ "expected text is found on page"
     $("h2").text().startsWith("Scrum on a Page")
   }
 }
