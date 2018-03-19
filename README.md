@@ -39,3 +39,31 @@ Example:
   </dependency>
 </dependencies>
 ```
+
+If you want to change the browser used in the Geb tests, just change tag `geb.env` in _pom.xml_:
+
+```xml
+    <!-- Geb, Selenium -->
+    <geb.env>phantomjs</geb.env>
+```
+
+Possible values can be looked up in
+[GebConfig.groovy](https://github.com/kriegaex/MavenTestResources/blob/master/src/main/groovy/GebConfig.groovy)
+in the test resources. Currently we have these:
+* `html_unit` - Selenium HtmlUnit driver with activated JavaScript, but without screenshot capability.
+  This is also used as a fall-back if `geb.env` is unspecified or misspelled. HtmlUnit is somewhat limited and
+  might fail on fancy web pages, but much more useful than I initially thought. It is worth a try for simple
+  headless tests.
+* `phantomjs` - PhantomJS is a feature-rich headless browser based on Chromium and can be used even in advanced
+  tests as a full alternative to Chrome, Firefox, IE etc. This is also great on Jenkins servers without any
+  pre-installed browsers and my browser of choice in that case, used in heavy-duty commercial projects. It is
+  also nice if developers want to run tests locally and not be bothered with browser Windows popping up all the
+  time while they are trying to continue their work.
+* `chrome_headless` - Google Chrome has a relatively new headless feature. I have not tested it extensively yet,
+  but it is looking really good. If Chrome is installed on your box anyway but you want to run your tests
+  headlessly, give it a try.  
+* `chrome` - Google Chrome in normal (non-headless) mode. Make sure that Chrome is installed locally.
+* `firefox` - Mozilla Firefox. Make sure that FF is installed locally.
+* `ie` - Microsoft Internet Explorer. Make sure that IE is installed locally.
+* `edge` - Microsoft Edge. Make sure that Edge is installed locally.
+* `opera` - Opera. Make sure that Opera (current, not legacy version) is installed locally.
