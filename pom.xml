@@ -37,7 +37,7 @@
 
     <!-- Geb, Selenium -->
     <!-- Possible geb.env values: html_unit, phantomjs, chrome, chrome_headless, firefox, ie, edge, opera -->
-    <geb.env>chrome_headless</geb.env>
+    <geb.env>phantomjs</geb.env>
     <geb.env.deployment>production</geb.env.deployment>
     <!--<tomcat.http.port>8080</tomcat.http.port>-->
 
@@ -478,11 +478,11 @@
         <scope>test</scope>
       </dependency>
 
-      <!-- Version 19 is used by selenium-remote-driver 3.0.1, 20 by embedded-ldap-junit 0.6 -->
+      <!-- Version 25.0-jre is used by selenium-remote-driver 3.14.0, 20 by embedded-ldap-junit 0.6 -->
       <dependency>
         <groupId>com.google.guava</groupId>
         <artifactId>guava</artifactId>
-        <version>19.0</version>
+        <version>25.0-jre</version>
       </dependency>
 
     </dependencies>
