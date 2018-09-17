@@ -1,0 +1,7 @@
+dn: CN=alice,DC=example,dc=com
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: user
+cn: alice
+sn: alice

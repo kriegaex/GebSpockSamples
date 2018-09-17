@@ -1,0 +1,21 @@
+dn: dc=example,dc=com
+objectClass: domain
+objectClass: top
+dc: example
+
+dn: cn=user,cn=schema,cn=configuration,dc=example,dc=com
+changetype: add
+objectclass: classSchema
+governsId: 1.2.840.113556.1.5.9
+objectClassCategory: 1
+subClassOf: organizationalPerson
+lDAPDisplayName: user
+description: a user
+
+dn: CN=alice,DC=example,dc=com
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: user
+cn: alice
+sn: alice

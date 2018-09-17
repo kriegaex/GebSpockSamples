@@ -32,16 +32,50 @@
     <maven.compiler.target>1.8</maven.compiler.target>
 
     <!-- Groovy compiler for Spock/Geb tests -->
-    <version.groovy-eclipse-compiler>2.9.2-01</version.groovy-eclipse-compiler>
-    <version.groovy-eclipse-batch>2.4.3-01</version.groovy-eclipse-batch>
+    <version.groovy-eclipse-compiler>2.9.3-01</version.groovy-eclipse-compiler>
+    <version.groovy-eclipse-batch>2.4.15-01</version.groovy-eclipse-batch>
 
     <!-- Geb, Selenium -->
-    <geb.env>phantomjs</geb.env>
+    <!-- Possible geb.env values: html_unit, phantomjs, chrome, chrome_headless, firefox, ie, edge, opera -->
+    <geb.env>chrome_headless</geb.env>
+    <geb.env.deployment>production</geb.env.deployment>
+    <!--<tomcat.http.port>8080</tomcat.http.port>-->
 
     <!-- Maven site -->
     <version.wagon-ssh>2.8</version.wagon-ssh>
+
+    <version.powermock>1.7.3</version.powermock>
+    <version.lombok>1.16.20</version.lombok>
   </properties>
 
+  <pluginRepositories>
+    <!-- Needed for latest Groovy Eclipse version -->
+    <pluginRepository>
+      <id>bintray</id>
+      <name>Groovy Bintray</name>
+      <url>https://dl.bintray.com/groovy/maven</url>
+      <releases>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
+
+  <repositories>
+    <repository>
+      <id>sonatype-snapshopts</id>
+      <name>Sonatype Snapshots</name>
+      <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+      <releases>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
   <build>
 
     <pluginManagement>
@@ -49,14 +83,24 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.6.0</version>
+          <version>3.7.0</version>
           <configuration>
             <source>${maven.compiler.source}</source>
             <target>${maven.compiler.target}</target>
             <!-- IMPORTANT -->
             <useIncrementalCompilation>false</useIncrementalCompilation>
             <encoding>${project.build.sourceEncoding}</encoding>
+            <!-- Groovy needed for Spock tests -->
             <compilerId>groovy-eclipse-compiler</compilerId>
+            <!--
+              Lombok agent needed for successful Maven compilation, see
+              https://github.com/groovy/groovy-eclipse/wiki/Groovy-Eclipse-Maven-plugin#project-lombok
+            -->
+            <compilerArguments>
+              <javaAgentClass>lombok.launch.Agent</javaAgentClass>
+            </compilerArguments>
+            <!-- Without this Lombok compilation fails -->
+            <fork>true</fork>
           </configuration>
           <dependencies>
             <dependency>
@@ -68,6 +112,11 @@
               <groupId>org.codehaus.groovy</groupId>
               <artifactId>groovy-eclipse-batch</artifactId>
               <version>${version.groovy-eclipse-batch}</version>
+            </dependency>
+            <dependency>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+              <version>${version.lombok}</version>
             </dependency>
           </dependencies>
         </plugin>
@@ -197,6 +246,7 @@
             <systemPropertyVariables>
               <test.tmpdir>${project.build.directory}/tmp</test.tmpdir>
               <geb.env>${geb.env}</geb.env>
+              <geb.env.deployment>${geb.env.deployment}</geb.env.deployment>
             </systemPropertyVariables>
             <argLine>-Dfile.encoding=UTF8</argLine>
           </configuration>
@@ -216,6 +266,9 @@
             <systemPropertyVariables>
               <test.tmpdir>${project.build.directory}/tmp</test.tmpdir>
               <geb.env>${geb.env}</geb.env>
+              <geb.env.deployment>${geb.env.deployment}</geb.env.deployment>
+              <geb.build.baseUrl>https://scrum-master.de</geb.build.baseUrl>
+              <test.server.port>${tomcat.http.port}</test.server.port>
             </systemPropertyVariables>
             <argLine>-Dfile.encoding=UTF8</argLine>
           </configuration>
@@ -313,6 +366,33 @@
     </pluginManagement>
 
     <plugins>
+
+      <plugin>
+        <groupId>org.apache.tomcat.maven</groupId>
+        <artifactId>tomcat7-maven-plugin</artifactId>
+        <version>2.2</version>
+        <configuration>
+          <!-- http port -->
+          <port>9090</port>
+          <!-- application path always starts with /-->
+          <path>/</path>
+          <!-- optional path to a context file -->
+          <contextFile>${tomcatContextXml}</contextFile>
+          <!-- optional system propoerties you want to add -->
+          <systemProperties>
+            <appserver.base>${project.build.directory}/appserver-base</appserver.base>
+            <appserver.home>${project.build.directory}/appserver-home</appserver.home>
+            <java.io.tmpdir>${project.build.directory}</java.io.tmpdir>
+          </systemProperties>
+          <!-- if you want to use test dependencies rather than only runtime -->
+          <useTestClasspath>true</useTestClasspath>
+          <!-- optional if you want to add some extra directories into the classloader -->
+          <additionalClasspathDirs>
+            <additionalClasspathDir></additionalClasspathDir>
+          </additionalClasspathDirs>
+        </configuration>
+      </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -348,7 +428,7 @@
       <dependency>
         <groupId>de.scrum-master.test</groupId>
         <artifactId>test-bom</artifactId>
-        <version>1.1</version>
+        <version>1.3</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -357,20 +437,178 @@
       <dependency>
         <groupId>de.scrum-master</groupId>
         <artifactId>test-resources</artifactId>
-        <version>1.2</version>
+        <version>1.3</version>
         <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.powermock</groupId>
+        <artifactId>powermock-core</artifactId>
+        <version>${version.powermock}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.powermock</groupId>
+        <artifactId>powermock-api-mockito</artifactId>
+        <version>${version.powermock}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.powermock</groupId>
+        <artifactId>powermock-module-junit4-rule-agent</artifactId>
+        <version>${version.powermock}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.powermock</groupId>
+        <artifactId>powermock-classloading-xstream</artifactId>
+        <version>${version.powermock}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.powermock</groupId>
+        <artifactId>powermock-module-junit4</artifactId>
+        <version>${version.powermock}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.powermock</groupId>
+        <artifactId>powermock-module-junit4-rule</artifactId>
+        <version>${version.powermock}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <!-- Version 19 is used by selenium-remote-driver 3.0.1, 20 by embedded-ldap-junit 0.6 -->
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>19.0</version>
       </dependency>
 
     </dependencies>
   </dependencyManagement>
 
   <dependencies>
+    <!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-web</artifactId>
+      <version>5.0.4.RELEASE</version>
+    </dependency>
+
+    <!-- Used by selenium-remote-driver and embedded-ldap-junit -->
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+    </dependency>
 
     <!-- Test resources + base configuration + base classes for Spock, Geb, Selenium -->
     <dependency>
       <groupId>de.scrum-master</groupId>
       <artifactId>test-resources</artifactId>
       <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.togglz</groupId>
+      <artifactId>togglz-servlet</artifactId>
+      <version>2.5.0.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>org.togglz</groupId>
+      <artifactId>togglz-junit</artifactId>
+      <version>2.5.0.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>de.jodamob.kotlin</groupId>
+      <artifactId>kotlin-runner-spock</artifactId>
+      <version>0.3.1</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.powermock</groupId>
+      <artifactId>powermock-api-mockito</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.powermock</groupId>
+      <artifactId>powermock-module-junit4</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.lucene</groupId>
+      <artifactId>lucene-core</artifactId>
+      <version>7.2.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpcore</artifactId>
+      <version>4.4.10</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.sling</groupId>
+      <artifactId>org.apache.sling.api</artifactId>
+      <version>2.16.4</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.sparkjava</groupId>
+      <artifactId>spark-core</artifactId>
+      <version>2.5</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>${version.lombok}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.25</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.2.3</version>
+    </dependency>
+
+    <dependency>
+      <groupId>commons-validator</groupId>
+      <artifactId>commons-validator</artifactId>
+      <version>1.6</version>
+    </dependency>
+
+    <!-- Contains ByteBuddy transitive dependency -->
+    <dependency>
+      <groupId>org.zapodot</groupId>
+      <artifactId>embedded-ldap-junit</artifactId>
+      <version>0.6</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.javers</groupId>
+      <artifactId>javers-core</artifactId>
+      <version>3.9.4</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.modelmapper</groupId>
+      <artifactId>modelmapper</artifactId>
+      <version>2.0.0</version>
+    </dependency>
+
+    <!-- BouncyCastle crypto -->
+    <dependency>
+      <groupId>org.bouncycastle</groupId>
+      <artifactId>bcprov-jdk15on</artifactId>
+      <version>1.60</version>
+    </dependency>
+    <dependency>
+      <groupId>org.bouncycastle</groupId>
+      <artifactId>bcpkix-jdk15on</artifactId>
+      <version>1.60</version>
     </dependency>
 
   </dependencies>

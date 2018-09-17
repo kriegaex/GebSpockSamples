@@ -1,0 +1,61 @@
+<html style="font-family: sans-serif">
+  <head>
+    <style>
+      label::before {
+        content: "some text";
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Sample Page</h1>
+    <form>
+      Date Format
+      <select name="dateFormat" id="dateFormat">
+        <option value="MM/DD/YYYY">MM/DD/YYYY</option>
+        <option value="DD/MM/YYYY">DD/MM/YYYY</option>
+      </select>
+      <p/>
+      Time Zone
+      <select id="timeZonePreference" name="timeZonePreference">
+        <option value="America/Chicago">- Select time zone -</option>
+        <option value="Etc/GMT+12">GMT -12:00, Dateline Time Marshall Islands</option>
+        <option value="US/Samoa">GMT -11:00, Samoa Time Samoa</option>
+        <option value="US/Hawaii">GMT -10:00, Hawaii Time Honolulu</option>
+        <option value="US/Alaska">GMT -09:00, Alaska Time (Anchorage)</option>
+        <option value="US/Pacific">GMT -08:00, Pacific Time (San Francisco)</option>
+        <option value="US/Arizona">GMT -07:00, Mountain Time (Arizona)</option>
+        <option value="America/Denver">GMT -07:00, Mountain Time (Denver)</option>
+        <option value="America/Chicago">GMT -06:00, Central Time (Chicago)</option>
+        <option value="America/Mexico_City">GMT -06:00, Mexico Time (Mexico City)</option>
+      </select>
+      <p/>
+      File upload
+      <input type="file" name="csvFile" id="fileUpload"/>
+      <p/>
+      Text area
+      <textarea rows="4" cols="50" id="textArea">The big brown fox jumps over the lazy dog</textarea>
+      <p/>
+      <input type="submit" name="submit" id="submit"/>
+    </form>
+    <label for="abc"> == $0
+    <a target="_blank" href="/abcd">something</a></label>
+    <div id="bottomDiv">bottom</div>
+    <input id="Date Input 1" readonly>
+    <input id="Date Input 2">
+    <input id="date-input-3" readonly="false">
+    <input id="date-input-4">
+    <input id="date-input-5" readonly="">
+    <ul class="dropdown-menu" id="dd-menu-assetReStandard-yes_no-udf" name="asset.userDefinedFields[5].fieldValue" role="menu" aria-labelledby="dropdown-assetReStandard-yes_no-udf">
+      <li role="presentation" title="No"><a role="menuitem" tabindex="-1" href="#" data-opt-val="0" rel="assetReStandard-yes_no-udf">No</a></li>
+      <li role="presentation" title="Yes"><a role="menuitem" tabindex="-1" href="#" data-opt-val="1" rel="assetReStandard-yes_no-udf">Yes</a></li>
+    </ul>
+    <ul id="countries">
+      <li title="DE">Germany</a></li>
+      <li title="US">USA</a></li>
+      <li title="IT">Italy</a></li>
+      <li title="TH">Thailand</a></li>
+    </ul>
+    <input type="button" name="showAlert" value="Alert" onclick="alert('Bang!');" />
+    <input type="button" name="showConfirm" value="Confirm" onclick="confirm('Do you like Geb?');" />
+  </body>
+</html>

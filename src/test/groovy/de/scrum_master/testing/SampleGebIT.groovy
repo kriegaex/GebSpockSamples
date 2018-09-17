@@ -16,7 +16,7 @@ class SampleGebIT extends GebReportingSpec {
     // GebReportingSpec tries to write a report (screenshot) at the end of each feature
     // method. But because we use 'CachingDriverFactory.clearCacheAndQuitDriver()',
     // there is no valid driver instance anymore from which to get a screenshot. Geb is
-    // unprepared for this kind of error, so we handle it gracefully so as to keep the
+    // unprepared for this kind of errorInfoInfo, so we handle it gracefully so as to keep the
     // test from failing just because the last screenshot cannot be taken anymore.
     try {
       super.report(label)
@@ -27,7 +27,7 @@ class SampleGebIT extends GebReportingSpec {
   }
 
   // We cannot use 'specificationContext' directly from 'setupSpec()' because of this
-  // compilation error: "Only @Shared and static fields may be accessed from here"
+  // compilation errorInfoInfo: "Only @Shared and static fields may be accessed from here"
   // Okay then, so use we a @Shared field as a workaround. ;-)
   @Shared
   def currentSpec = specificationContext.currentSpec
