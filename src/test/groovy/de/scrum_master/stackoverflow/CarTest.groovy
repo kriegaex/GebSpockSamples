@@ -1,6 +1,7 @@
 package de.scrum_master.stackoverflow
 
-import groovy.transform.TypeChecked
+import org.junit.runners.model.MultipleFailureException
+import spock.lang.FailsWith
 import spock.lang.Specification
 
 class CarTest extends Specification {
@@ -30,6 +31,7 @@ class CarTest extends Specification {
     true
   }
 
+//  @FailsWith(MultipleFailureException)
   def "Use the 'verifyAll' Spock feature"() {
     given:
     Closure sq = { x ->
