@@ -5,7 +5,7 @@ import geb.module.Select
 import org.openqa.selenium.interactions.Actions
 
 class DateFormatTimeZonePage extends Page {
-  static url = "file:///C:/Users/alexa/Documents/java-src/GebSpockSamples/src/test/resources/dateformat-timezone.htm"
+  static url = this.getResource("/dateformat-timezone.htm").toString()
 
   // See https://stackoverflow.com/a/51257121/1082681
   static boolean alternativeAt = false
