@@ -26,6 +26,16 @@ class EnhancedPowerAssertionTest extends Specification {
     getClass().mixin PowerAssertionEnhancer
   }
 
+  def "Power-assert output for unparametrised 'assert'"() {
+    expect:
+    assert ("one".capitalize() * 3).toUpperCase() == "OneOneOne"
+  }
+
+  def "Power-assert output for implicit Spock-style 'assert'"() {
+    expect:
+    ("one".capitalize() * 3).toUpperCase() == "OneOneOne"
+  }
+
   def "No power-assert output for parametrised 'assert'"() {
     expect:
     assert ("one".capitalize() * 3).toUpperCase() == "OneOneOne" :
