@@ -26,7 +26,13 @@ class EnhancedPowerAssertionTest extends Specification {
     getClass().mixin PowerAssertionEnhancer
   }
 
-  def myFeature() {
+  def "No power-assert output for parametrised 'assert'"() {
+    expect:
+    assert ("one".capitalize() * 3).toUpperCase() == "OneOneOne" :
+      "This is some additional info about the error"
+  }
+
+  def "Combine power-assert output with extra failure log output"() {
     expect:
     specialAssert "This is some additional info about the error", {
       assert ("one".capitalize() * 3).toUpperCase() == "OneOneOne"
