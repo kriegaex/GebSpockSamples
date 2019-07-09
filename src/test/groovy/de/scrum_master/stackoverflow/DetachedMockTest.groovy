@@ -2,17 +2,19 @@ package de.scrum_master.stackoverflow
 
 import org.spockframework.mock.MockUtil
 import spock.lang.Specification
+import spock.lang.Unroll
+import spock.mock.AutoAttach
 import spock.mock.DetachedMockFactory
 
 class DetachedMockTest extends Specification {
   static mockFactory = new DetachedMockFactory()
-  static mockUtil = new MockUtil()
 
-  def "Use detached mock"() {
+  @AutoAttach
+  def engine = mockFactory.Mock(Engine)
+
+  def "Auto-attach detached mock"() {
     given:
-    def engine = mockFactory.Mock(Engine)
     engine.isStarted() >> { println "Fake started state"; true }
-    mockUtil.attachMock(engine, this)
     def car = new Car(engine: engine)
 
     when:
@@ -28,9 +30,32 @@ class DetachedMockTest extends Specification {
     engine.isStarted()
     1 * engine.stop() >> { println "Stopping engine" }
     engine.isStarted()
+  }
+
+  def "Manually attach detached mock"() {
+    given:
+    def myEngine = mockFactory.Mock(Engine)
+    myEngine.isStarted() >> { println "Fake started state"; true }
+    def mockUtil = new MockUtil()
+    mockUtil.attachMock(myEngine, this)
+    def car = new Car(engine: myEngine)
+
+    when:
+    car.drive()
+    then:
+    myEngine.isStarted()
+    1 * myEngine.start() >> { println "Starting engine" }
+    myEngine.isStarted()
+
+    when:
+    car.park()
+    then:
+    myEngine.isStarted()
+    1 * myEngine.stop() >> { println "Stopping engine" }
+    myEngine.isStarted()
 
     cleanup:
-    mockUtil.detachMock(engine)
+    mockUtil.detachMock(myEngine)
   }
 
   static class Engine {

@@ -5,6 +5,9 @@ import org.junit.Rule
 import org.slf4j.Logger
 import spock.lang.Specification
 
+/**
+ * See https://stackoverflow.com/a/49870470/1082681
+ */
 @Slf4j
 class LombokSlf4jLogTest extends Specification {
   def logger = Spy(new LoggerDelegate(originalLogger: log))
@@ -17,8 +20,7 @@ class LombokSlf4jLogTest extends Specification {
     new Clazz().method()
 
     then: "a warning is logged"
-    1 * logger.warn(*_)
-    true
+    2 * logger.warn(*_)
   }
 
   static class LoggerDelegate {

@@ -2,6 +2,7 @@ package de.scrum_master.stackoverflow
 
 import geb.module.FormElement
 import geb.spock.GebReportingSpec
+import org.openqa.selenium.support.ui.ExpectedConditions
 import spock.lang.Unroll
 
 import static java.util.Calendar.*
@@ -18,6 +19,7 @@ class DatePickerIT extends GebReportingSpec {
     when: "a date picker on the Angular demo page is chosen"
     DatePickerPage page = to DatePickerPage
     def datePickerInputField = page.datePickerInputFields[datePickerIndex]
+    ExpectedConditions.elementToBeClickable datePickerInputField.firstElement()
 
     then: "that date picker instance is (in-)active as expected"
     datePickerInputField.module(FormElement).enabled == isEnabled

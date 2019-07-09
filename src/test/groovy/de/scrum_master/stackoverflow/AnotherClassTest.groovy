@@ -1,13 +1,11 @@
 package de.scrum_master.stackoverflow
 
-import spock.lang.Ignore
 import spock.lang.Specification
 
 /**
  * See https://stackoverflow.com/q/48391716/1082681
  * See http://spockframework.org/spock/docs/1.1/all_in_one.html#GroovyMocks
  */
-@Ignore
 class AnotherClassTest extends Specification {
   def "indirectly use GroovyMock for final method in final class"() {
     given:
@@ -15,8 +13,8 @@ class AnotherClassTest extends Specification {
       finalMethod() >> "mocked"
     }
 
-    expect:
-    new AnotherClass().doSomething(finalClass) == "mocked"
+    expect: "GroovyMock does not work for Java class"
+    new AnotherClass().doSomething(finalClass) != "mocked"
   }
 
   def "indirectly use global GroovySpy for final static method in final class"() {
@@ -24,7 +22,7 @@ class AnotherClassTest extends Specification {
     GroovySpy(FinalClass, global: true)
     FinalClass.finalStaticMethod() >> "mocked"
 
-    expect:
-    new AnotherClass().doSomethingElse() == "mocked"
+    expect: "GroovySpy does not work for Java class"
+    new AnotherClass().doSomethingElse() != "mocked"
   }
 }

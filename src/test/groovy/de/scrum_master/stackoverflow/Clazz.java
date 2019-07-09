@@ -7,6 +7,6 @@ public class Clazz {
   public void method() {
     // ... code
     log.warn("message");
-//    log.warn("message", new RuntimeException("uh-oh"));
+    log.warn("message", new RuntimeException("uh-oh"));
   }
 }

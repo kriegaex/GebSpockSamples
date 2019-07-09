@@ -82,15 +82,21 @@ class DateFormatTimeZoneIT extends GebReportingSpec {
     given:
     def uploadFile = new File("src/test/resources/test.txt")
     def page = to DateFormatTimeZonePage
+    report "Before selecting upload file"
 
     when:
     page.fileUploadButton = uploadFile.absolutePath
-    page.fileUploadButton.click()
+
+    then:
     report "After selecting upload file"
+    page.fileUploadButton.value() =~ /$uploadFile.name$/
+
+    when:
     page.submitButton.click()
 
     then:
-    uploadFile.exists()
+    report "After uploading file"
+    page.fileUploadButton.value() == ""
   }
 
   def "Get text from CSS pseudo-element ::before"() {
@@ -116,6 +122,7 @@ class DateFormatTimeZoneIT extends GebReportingSpec {
     given:
     def testHelper = new GebTestHelper(driver, js)
     def page = to DateFormatTimeZonePage
+    def originalWindowSize = driver.manage().window().size
     def labelSingle = page.label.singleElement()
 
     when:
@@ -157,11 +164,16 @@ class DateFormatTimeZoneIT extends GebReportingSpec {
     then:
     testHelper.isPartiallyVisible(labelSingle)
     testHelper.isFullyVisible(labelSingle)
+
+    cleanup:
+    driver.manage().window().size = originalWindowSize
   }
 
   def "Resize window"() {
     given:
     def page = to DateFormatTimeZonePage
+    def originalWindowSize = driver.manage().window().size
+
 //    report "Initial window"
     println "Initial window"
 
@@ -191,6 +203,9 @@ class DateFormatTimeZoneIT extends GebReportingSpec {
     windowSize.width == resizeWidth
     windowSize.height == resizeHeight
     println "Finished"
+
+    cleanup:
+    driver.manage().window().size = originalWindowSize
   }
 
   def "Dynamically added 'at' content"() {

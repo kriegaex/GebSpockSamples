@@ -31,7 +31,7 @@ class CarTest extends Specification {
     true
   }
 
-//  @FailsWith(MultipleFailureException)
+  @FailsWith(MultipleFailureException)
   def "Use the 'verifyAll' Spock feature"() {
     given:
     Closure sq = { x ->

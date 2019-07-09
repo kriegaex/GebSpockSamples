@@ -11,10 +11,14 @@ class FinalVariablesTest extends Specification {
     then:
     a + b + c == 12
 
+    // This used to work in Groovy 2.4, but Groovy 2.5 now enforces final local variables
+    // and does not compile the re-assignment.
+/*
     when:
     a = b = c = 11
     then:
     a + b + c == 33
+*/
   }
 
   final def d = 3

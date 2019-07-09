@@ -8,3 +8,6 @@ target/
 # Eclipse
 .settings/
 .project
+
+# Others
+chromedriver.log

@@ -12,6 +12,6 @@ class MyBaseIT extends GebSpec {
     $("#search_button_homepage").click()
 
     then: "the first result (excluding ads) is the geb website"
-    $("#links").$(".links_main a", 0).attr("href") == "http://www.gebish.org/"
+    $("#links").$(".links_main a", 0).attr("href") == "https://gebish.org/"
   }
 }

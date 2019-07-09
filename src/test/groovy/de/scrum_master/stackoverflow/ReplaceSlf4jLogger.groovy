@@ -7,13 +7,11 @@ import java.lang.reflect.Field
 import java.lang.reflect.Modifier
 
 /**
- *  Helper to exchange loggers set by lombok with mock logger
+ * Helper to replace Lombok logger by mock:
+ *   - allows to assert log action
+ *   - undos change after test to keep normal logging in other tests
  *
- * allows to assert log action.
- *
- * Undos change after test to keep normal logging in other tests.
- *
- * code from this  <a href="https://stackoverflow.com/a/25031713/3573038">answer</a> answer
+ * See https://stackoverflow.com/a/49870470/1082681
  */
 class ReplaceSlf4jLogger extends ExternalResource {
   Field logField

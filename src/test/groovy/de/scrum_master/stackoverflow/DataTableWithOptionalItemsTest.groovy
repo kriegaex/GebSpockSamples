@@ -29,7 +29,7 @@ class DataTableWithOptionalItemsTest extends Specification {
     'TEST-ITEM7' | 'Category7' | 'Sub-Category7' | 'Brand7' | 'TYPE7' | 'FEATURE7'
     'TEST-ITEM8' | 'Category8' | 'Sub-Category8' | 'Brand8' | 'TYPE8' | 'FEATURE8'
     'TEST-ITEM9' | null        | null            | null     | null    | null
-    'TEST-FAIL'  | 'CategoryX' | 'Sub-CategoryX' | 'BrandX' | 'TYPEX' | 'FEATUREX'
+//    'TEST-FAIL'  | 'CategoryX' | 'Sub-CategoryX' | 'BrandX' | 'TYPEX' | 'FEATUREX'
   }
 
   static final testData = [

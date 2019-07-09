@@ -9,6 +9,7 @@ import java.util.List;
 
 public class App {
   public static void main(String[] args) {
+/*
     List<ListItem> list1 = ImmutableList.of(
       ListItem.builder().itemName("item1").itemValue("value").build(),
       ListItem.builder().itemName("item2").itemValue("value2").build()
@@ -34,5 +35,6 @@ public class App {
       .build()
       .compare(tlc1, tlc2);
     System.out.println(diffTlc);
+*/
   }
 }
