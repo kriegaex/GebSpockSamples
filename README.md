@@ -16,7 +16,7 @@ Example:
     <dependency>
       <groupId>de.scrum-master.test</groupId>
       <artifactId>test-bom</artifactId>
-      <version>1.1</version>
+      <version>1.4</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
@@ -24,7 +24,7 @@ Example:
     <dependency>
       <groupId>de.scrum-master</groupId>
       <artifactId>test-resources</artifactId>
-      <version>1.2</version>
+      <version>1.4</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -44,7 +44,7 @@ If you want to change the browser used in the Geb tests, just change tag `geb.en
 
 ```xml
     <!-- Geb, Selenium -->
-    <geb.env>phantomjs</geb.env>
+    <geb.env>chrome_headless</geb.env>
 ```
 
 Possible values can be looked up in
@@ -67,3 +67,4 @@ in the test resources. Currently we have these:
 * `ie` - Microsoft Internet Explorer. Make sure that IE is installed locally.
 * `edge` - Microsoft Edge. Make sure that Edge is installed locally.
 * `opera` - Opera. Make sure that Opera (current, not legacy version) is installed locally.
+* `win_app` - Appium Windows driver (used for Windows Calculator demo test)
