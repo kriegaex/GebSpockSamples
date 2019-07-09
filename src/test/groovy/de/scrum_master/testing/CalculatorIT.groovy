@@ -13,6 +13,12 @@ import static java.text.NumberFormat.getInstance
 /**
  * Adapted from an example found at https://github.com/Microsoft/WinAppDriver
  * and made to work with non-English calculator versions, too (tested with German)
+ *
+ * Before running this test, prepare according to the above GitHub read-me:
+ *   - activate developer mode:
+ *     https://docs.microsoft.com/en-us/windows/uwp/get-started/enable-your-device-for-development
+ *   - install + start Windows Driver:
+ *     c:\Program Files (x86)\Windows Application Driver\WinAppDriver.exe
  */
 
 @Requires({ os.windows && sys["geb.env"] == "win_app" })
