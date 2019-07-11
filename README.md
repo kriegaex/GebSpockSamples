@@ -14,9 +14,9 @@ Example:
   <dependencies>
     <!-- BoM with test dependency versions -->
     <dependency>
-      <groupId>de.scrum-master.test</groupId>
+      <groupId>de.scrum-master</groupId>
       <artifactId>test-bom</artifactId>
-      <version>1.4</version>
+      <version>1.4.1</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
@@ -24,7 +24,7 @@ Example:
     <dependency>
       <groupId>de.scrum-master</groupId>
       <artifactId>test-resources</artifactId>
-      <version>1.4</version>
+      <version>1.4.1</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
