@@ -55,4 +55,4 @@ jobs:
       - name: Build with Maven
         # Chrome Headless does not need Xvfb
         # TODO: When also using other browsers, we need Xvfb on Linux
-        run: mvn --show-version --errors --batch-mode -P github "-Dgeb.env=chrome_headless" clean verify
+        run: mvn --show-version --errors --batch-mode -P github "-Dgeb.env=chrome_headless" -fae clean verify
