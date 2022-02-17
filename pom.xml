@@ -854,6 +854,20 @@
       </build>
     </profile>
 
+    <profile>
+      <id>github</id>
+      <dependencies>
+        <!-- Jenkins Spock (for https://stackoverflow.com/q/57036137/1082681) -->
+        <dependency>
+          <groupId>com.homeaway.devtools.jenkins</groupId>
+          <artifactId>jenkins-spock</artifactId>
+          <version>2.1.5</version>
+          <!-- TODO: Bump version after https://github.com/ExpediaGroup/jenkins-spock/pull/111 was merged and released -->
+          <!--<version>2.1.6-SNAPSHOT</version>-->
+        </dependency>
+      </dependencies>
+    </profile>
+
   </profiles>
 
   <modules>
