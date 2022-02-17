@@ -11,3 +11,4 @@ target/
 
 # Others
 chromedriver.log
+*.o

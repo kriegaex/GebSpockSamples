@@ -1,12 +1,15 @@
 package de.scrum_master.stackoverflow.q68949748
 
 import com.baeldung.jni.HelloWorldJNI
+import spock.lang.Requires
 import spock.lang.Specification
 
 /**
- * Make sure to copy c:\Users\Alexa\Documents\java-src\GebSpockSamples\geb-spock-samples\native.dll to the
- * library path, e.g. to the Maven module base path which is used as '.'
+ * Make sure to put the native libraries directory on the library path via
+ *   -Djava.library.path=${basedir}/src/main/resources/lib
+ * in Maven Surefire/Failsafe 'argLine' option
  */
+@Requires({ os.windows || os.linux })
 class BaledungJNITest extends Specification {
   def "verify original native method"() {
     given:

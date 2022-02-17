@@ -256,13 +256,14 @@
               <exclude>**/IT*.java</exclude>
             </excludes>
             <systemPropertyVariables>
-              <argLine>${jvm.arg.addOpens}</argLine>
               <test.tmpdir>${project.build.directory}/tmp</test.tmpdir>
               <geb.env>${geb.env}</geb.env>
               <geb.env.deployment>${geb.env.deployment}</geb.env.deployment>
             </systemPropertyVariables>
             <argLine>
               -Dfile.encoding=UTF8
+              ${jvm.arg.addOpens}
+              -Djava.library.path=${basedir}/src/main/resources/lib
               -javaagent:"${settings.localRepository}"/org/jmockit/jmockit/${version.jmockit}/jmockit-${version.jmockit}.jar
             </argLine>
           </configuration>
@@ -281,7 +282,6 @@
           <configuration>
             <!--<skipTests>true</skipTests>-->
             <systemPropertyVariables>
-              <argLine>${jvm.arg.addOpens}</argLine>
               <test.tmpdir>${project.build.directory}/tmp</test.tmpdir>
               <geb.env>${geb.env}</geb.env>
               <geb.env.deployment>${geb.env.deployment}</geb.env.deployment>
@@ -295,8 +295,10 @@
                   Needs to be inactive for IDEA, but active for Failsafe.
                   Otherwise arguments for Surefire and Failsafe appear 2x on the command line.
               -->
-<!--              -Dfile.encoding=UTF8-->
-<!--              -javaagent:"${settings.localRepository}"/org/jmockit/jmockit/${version.jmockit}/jmockit-${version.jmockit}.jar-->
+              -Dfile.encoding=UTF8
+              ${jvm.arg.addOpens}
+              -Djava.library.path=${basedir}/src/main/resources/lib
+              -javaagent:"${settings.localRepository}"/org/jmockit/jmockit/${version.jmockit}/jmockit-${version.jmockit}.jar
             </argLine>
           </configuration>
           <executions>
@@ -784,18 +786,6 @@
     </dependency>
 
     <!--
-      Mock JNI methods
-      https://stackoverflow.com/q/68949748/1082681
-      https://www.baeldung.com/jni
-      https://github.com/eugenp/tutorials/tree/master/java-native
-    -->
-    <dependency>
-      <groupId>com.baeldung</groupId>
-      <artifactId>java-native</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
-    </dependency>
-
-    <!--
       HTTPBuilder, used in
         https://stackoverflow.com/q/68093910/1082681
         https://stackoverflow.com/q/57468204/1082681
@@ -875,6 +865,7 @@
     <module>geb-spock-samples-powermock</module>
     <module>geb-spock-samples-mockito</module>
     <module>geb-spock-samples-sarek</module>
+    <module>geb-spock-samples-jni</module>
   </modules>
 
 </project>
