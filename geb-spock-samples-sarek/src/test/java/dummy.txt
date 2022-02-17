@@ -1,0 +1,5 @@
+This file only exists in order to make Groovy-Eclipse automatically
+recognise the src/test/groovy folder without changing the Maven
+configuration. See also:
+
+https://github.com/groovy/groovy-eclipse/wiki/Groovy-Eclipse-Maven-plugin#setting-up-the-source-folders

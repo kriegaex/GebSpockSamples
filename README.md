@@ -16,7 +16,7 @@ Example:
     <dependency>
       <groupId>de.scrum-master</groupId>
       <artifactId>test-bom</artifactId>
-      <version>1.4.1</version>
+      <version>1.4.2</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
@@ -24,7 +24,7 @@ Example:
     <dependency>
       <groupId>de.scrum-master</groupId>
       <artifactId>test-resources</artifactId>
-      <version>1.4.1</version>
+      <version>1.4.2</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -54,14 +54,9 @@ in the test resources. Currently we have these:
   This is also used as a fall-back if `geb.env` is unspecified or misspelled. HtmlUnit is somewhat limited and
   might fail on fancy web pages, but much more useful than I initially thought. It is worth a try for simple
   headless tests.
-* `phantomjs` - PhantomJS is a feature-rich headless browser based on Chromium and can be used even in advanced
-  tests as a full alternative to Chrome, Firefox, IE etc. This is also great on Jenkins servers without any
-  pre-installed browsers and my browser of choice in that case, used in heavy-duty commercial projects. It is
-  also nice if developers want to run tests locally and not be bothered with browser Windows popping up all the
-  time while they are trying to continue their work.
-* `chrome_headless` - Google Chrome has a relatively new headless feature. I have not tested it extensively yet,
-  but it is looking really good. If Chrome is installed on your box anyway but you want to run your tests
-  headlessly, give it a try.  
+* `chrome_headless` - Google Chrome's headless browser is what you want to use, if you need a full-featured browser
+  engine without all the nasty windows popping up on your workstation during tests. This engine replaces the previously
+  supported PhantomJS, which has been removed from the Geb configuration.
 * `chrome` - Google Chrome in normal (non-headless) mode. Make sure that Chrome is installed locally.
 * `firefox` - Mozilla Firefox. Make sure that FF is installed locally.
 * `ie` - Microsoft Internet Explorer. Make sure that IE is installed locally.

@@ -1,0 +1,4 @@
+de.scrum_master.testing.extension.TestResultExtension
+# When the driver cannot be instantiated, this can fail and lead to follow-up problems
+#de.scrum_master.testing.extension.TestFailureScreenshotExtension
+de.scrum_master.testing.extension.SkipSetupGlobalExtension
