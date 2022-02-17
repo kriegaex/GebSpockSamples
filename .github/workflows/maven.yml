@@ -1,0 +1,58 @@
+name: Java CI
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches:
+      - '*'
+      - '!gh-pages'
+  pull_request:
+    branches:
+      - '*'
+      - '!gh-pages'
+
+jobs:
+  build:
+
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, windows-latest, macOS-latest ]
+        javaVersion: [ 8, 11, 17 ]
+      fail-fast: false
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+
+      - name: Set Git options
+        # Check out as-is, commit Unix-style line endings
+        run: git config --global core.autocrlf input
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up cache for ~./m2/repository
+        uses: actions/cache@v2.1.7
+        with:
+          path: |
+            ~/.m2/repository
+            !~/.m2/repository/de/scrum-master/geb-spock-*
+            ~/.cache/selenium
+          key: maven-${{ matrix.os }}-java${{ matrix.javaVersion }}-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            maven-${{ matrix.os }}-java${{ matrix.javaVersion }}-
+            maven-${{ matrix.os }}-
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2.5.0
+        with:
+          java-version: ${{ matrix.javaVersion }}
+          distribution: adopt-hotspot
+
+      - name: Set up Chrome browser
+        uses: browser-actions/setup-chrome@latest
+
+      - name: Build with Maven
+        # Chrome Headless does not need Xvfb
+        # TODO: When also using other browsers, we need Xvfb on Linux
+        run: mvn --show-version --errors --batch-mode "-Dgeb.env=chrome_headless" clean verify
