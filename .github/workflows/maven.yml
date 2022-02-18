@@ -52,7 +52,27 @@ jobs:
       - name: Set up Chrome browser
         uses: browser-actions/setup-chrome@latest
 
+      - name: Print tool versions
+        # TODO: 'chrome --version' must be 'chromium --version' on MacOS
+        run: |
+          java -version
+          mvn --batch-mode --version
+
       - name: Build with Maven
         # Chrome Headless does not need Xvfb
         # TODO: When also using other browsers, we need Xvfb on Linux
-        run: mvn --show-version --errors --batch-mode -P github "-Dgeb.env=chrome_headless" -fae clean verify
+        run: mvn --errors --batch-mode -P github "-Dgeb.env=chrome_headless" -fae clean verify
+
+      # No matter if a preceding test run failed or not, try to generate and upload a test report
+      # TODO: these steps should only happen if at least the build without tests passed, not always
+
+      - name: Generate aggregate test report
+        if: always()
+        run: mvn --batch-mode -P github "-Dgeb.env=chrome_headless" -Daggregate=true surefire-report:report-only
+
+      - name: Attach aggregate test report to build
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: surefire-report-${{ matrix.os }}-java${{ matrix.java }}
+          path: target/site/surefire-report.html
