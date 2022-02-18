@@ -74,5 +74,5 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v2
         with:
-          name: surefire-report-${{ matrix.os }}-java${{ matrix.java }}
+          name: surefire-report-${{ matrix.os }}-java${{ matrix.javaVersion }}
           path: target/site/surefire-report.html
