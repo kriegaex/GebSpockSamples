@@ -23,6 +23,8 @@ import static org.powermock.api.support.membermodification.MemberModifier.stub
 @PowerMockRunnerDelegate(Sputnik)
 @PrepareForTest(ClassCallingStaticSystemMethods)
 class PowermockStaticMockSpockTest extends Specification {
+  // TODO: Configure '--add-opens' and '-Djdk.attach.allowAttachSelf=true' for JDK 16+ in Surefire/Failsafe
+  @Requires({ Integer.parseInt(System.getProperty("java.version").replaceAll("[.].*", "")) < 16 })
   def testUUID() {
     given:
     def id = "493410b3-dd0b-4b78-97bf-289f50f6e74f"

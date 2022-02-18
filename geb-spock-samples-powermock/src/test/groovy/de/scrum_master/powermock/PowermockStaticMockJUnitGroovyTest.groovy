@@ -28,6 +28,7 @@ import static org.powermock.api.mockito.PowerMockito.*
 @CompileStatic
 class PowermockStaticMockJUnitGroovyTest extends Specification {
   private static final boolean JAVA_8_OR_LOWER = Integer.parseInt(System.getProperty("java.version").replaceAll("[.].*", "")) < 9
+  private static final boolean JAVA_15_OR_LOWER = Integer.parseInt(System.getProperty("java.version").replaceAll("[.].*", "")) < 16
 
   @Test
   void mySqlDateTest_whenThenReturn() {
@@ -85,6 +86,7 @@ class PowermockStaticMockJUnitGroovyTest extends Specification {
 
   @Test
   void assertThatMockingOfCollectionsWork() throws Exception {
+    assumeTrue(JAVA_15_OR_LOWER)
     List<?> list = new LinkedList<Object>()
     mockStatic(Collections.class)
 

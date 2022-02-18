@@ -9,6 +9,7 @@ import org.spockframework.runtime.Sputnik
 import org.togglz.core.context.FeatureContext
 import org.togglz.junit.TogglzRule
 import org.togglz.testing.TestFeatureManager
+import spock.lang.Requires
 import spock.lang.Specification
 
 import static org.powermock.api.mockito.PowerMockito.*
@@ -17,6 +18,8 @@ import static de.scrum_master.stackoverflow.PocToggle.USE_MY_FEATURE
 /**
  * See https://github.com/powermock/powermock/wiki/JUnit_Delegating_Runner
  */
+// TODO: Configure '--add-opens' and '-Djdk.attach.allowAttachSelf=true' for JDK 16+ in Surefire/Failsafe
+@Requires({ Integer.parseInt(System.getProperty("java.version").replaceAll("[.].*", "")) < 16 })
 @RunWith(PowerMockRunner)
 @PowerMockRunnerDelegate(Sputnik)
 @PrepareForTest([FeatureContext])

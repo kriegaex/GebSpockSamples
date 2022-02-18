@@ -1,10 +1,14 @@
 package de.scrum_master.stackoverflow.q65144983
 
+import spock.lang.Requires
 import spock.lang.Specification
 
+// TODO: Configure '--add-opens' and '-Djdk.attach.allowAttachSelf=true' for JDK 16+ in Surefire/Failsafe
+@Requires({ Integer.parseInt(System.getProperty("java.version").replaceAll("[.].*", "")) < 16 })
 class FormConfigServiceImplTest extends Specification {
   def 'test save formConfig without defaults fields'() {
     given:
+    // TODO: Cannot spy on ArrayList because of JDK 16+ reflection limitations -> open module 'java.util'
     List fieldConfigList = Spy(new ArrayList<FieldConfig>())
     FormConfig formConfig = Mock() {
       getFieldsConfig() >> fieldConfigList
