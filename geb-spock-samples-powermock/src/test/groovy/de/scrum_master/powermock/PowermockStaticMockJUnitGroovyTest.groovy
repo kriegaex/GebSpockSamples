@@ -27,8 +27,8 @@ import static org.powermock.api.mockito.PowerMockito.*
 @PrepareForTest([ClassCallingStaticSystemMethods])
 @CompileStatic
 class PowermockStaticMockJUnitGroovyTest extends Specification {
+  // TODO: PowerMock cannpr prepare classes for test on JDK 9+ which it can on 8
   private static final boolean JAVA_8_OR_LOWER = Integer.parseInt(System.getProperty("java.version").replaceAll("[.].*", "")) < 9
-  private static final boolean JAVA_15_OR_LOWER = Integer.parseInt(System.getProperty("java.version").replaceAll("[.].*", "")) < 16
 
   @Test
   void mySqlDateTest_whenThenReturn() {
@@ -86,7 +86,6 @@ class PowermockStaticMockJUnitGroovyTest extends Specification {
 
   @Test
   void assertThatMockingOfCollectionsWork() throws Exception {
-    assumeTrue(JAVA_15_OR_LOWER)
     List<?> list = new LinkedList<Object>()
     mockStatic(Collections.class)
 

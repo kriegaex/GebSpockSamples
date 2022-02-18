@@ -1,10 +1,7 @@
 package de.scrum_master.stackoverflow.q65144983
 
-import spock.lang.Requires
 import spock.lang.Specification
 
-// TODO: Configure '--add-opens' and '-Djdk.attach.allowAttachSelf=true' for JDK 16+ in Surefire/Failsafe
-@Requires({ Integer.parseInt(System.getProperty("java.version").replaceAll("[.].*", "")) < 16 })
 class FormConfigServiceImplTest extends Specification {
   def 'test save formConfig without defaults fields'() {
     given:

@@ -822,6 +822,20 @@
         <jvm.arg.addOpens>--add-opens java.base/java.lang=ALL-UNNAMED</jvm.arg.addOpens>
       </properties>
     </profile>
+    <profile>
+      <id>jdk-16</id>
+      <activation>
+        <jdk>[16,)</jdk>
+      </activation>
+      <properties>
+        <jvm.arg.addOpens>
+          --add-opens java.base/java.lang=ALL-UNNAMED
+          --add-opens java.base/java.lang.ref=ALL-UNNAMED
+          --add-opens java.base/java.io=ALL-UNNAMED
+          --add-opens java.base/java.util=ALL-UNNAMED
+        </jvm.arg.addOpens>
+      </properties>
+    </profile>
 
     <profile>
       <id>check-maven</id>

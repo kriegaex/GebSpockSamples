@@ -1,7 +1,6 @@
 package de.scrum_master.stackoverflow.q58101434
 
 import org.junit.runner.RunWith
-import org.mockito.Mockito
 import org.powermock.core.classloader.annotations.PowerMockIgnore
 import org.powermock.core.classloader.annotations.PrepareForTest
 import org.powermock.modules.junit4.PowerMockRunner
@@ -10,7 +9,6 @@ import org.spockframework.runtime.Sputnik
 import org.springframework.http.HttpStatus
 import org.springframework.http.RequestEntity
 import org.springframework.http.ResponseEntity
-import spock.lang.Requires
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -21,8 +19,6 @@ import static org.powermock.api.mockito.PowerMockito.*
 import static org.powermock.api.support.membermodification.MemberMatcher.method
 import static org.powermock.api.support.membermodification.MemberModifier.stub
 
-// TODO: Configure '--add-opens' and '-Djdk.attach.allowAttachSelf=true' for JDK 16+ in Surefire/Failsafe
-@Requires({ Integer.parseInt(System.getProperty("java.version").replaceAll("[.].*", "")) < 16 })
 @RunWith(PowerMockRunner)
 @PowerMockRunnerDelegate(Sputnik)
 // Avoid java.lang.IllegalAccessError:
