@@ -20,8 +20,9 @@ import spock.lang.Unroll
     .contains("mock-maker-inline")
   String classUnderTestName = "de.scrum_master.gitter.spock.d20210128.ClassThatLogs"
   boolean classUnderTestLoaded = ClassLoaderChecker.isClassLoaded(classUnderTestName)
-  // TODO: using 'inlineMockMakerActive &&' yields "Unsupported class file major version 60" in Groovy 2.5 under JDK 16
-  return /*inlineMockMakerActive &&*/ !classUnderTestLoaded
+  println "inlineMockMakerActive = $inlineMockMakerActive"
+  println "classUnderTestLoaded = $classUnderTestLoaded"
+  return inlineMockMakerActive && !classUnderTestLoaded
 })
 class ClassThatLogsTest extends Specification {
   @Shared

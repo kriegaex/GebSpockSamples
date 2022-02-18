@@ -12,8 +12,7 @@
   <artifactId>geb-spock-samples-mockito</artifactId>
 
   <properties>
-    <mockito.version>3.7.7</mockito.version>
-    <powermock.version>2.0.7</powermock.version>
+    <mockito.version>4.3.1</mockito.version>
   </properties>
 
   <dependencies>
@@ -23,20 +22,6 @@
       <version>${mockito.version}</version>
       <scope>test</scope>
     </dependency>
-
-    <dependency>
-      <groupId>org.powermock</groupId>
-      <artifactId>powermock-module-junit4</artifactId>
-      <version>${powermock.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.powermock</groupId>
-      <artifactId>powermock-api-mockito2</artifactId>
-      <version>2.0.7</version>
-      <scope>test</scope>
-    </dependency>
-
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-inline</artifactId>
@@ -44,5 +29,42 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
+  <build>
+
+    <plugins>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <executions>
+          <execution>
+            <!-- Modify default test execution -->
+            <id>default-test</id>
+            <configuration>
+              <!-- Amend default execution with additional exclude -->
+              <excludes combine.children="append">
+                <exclude>**/ClassThatLogsTest.java</exclude>
+              </excludes>
+            </configuration>
+          </execution>
+          <!-- Add an extra test execution for tests requiring one JVM per test -->
+          <execution>
+            <id>single-jvm-test</id>
+            <!-- Phase and goal are needed here, because it was not specified in a parent yet -->
+            <phase>test</phase>
+            <goals>
+              <goal>test</goal>
+            </goals>
+            <configuration>
+              <includes combine.children="append">
+                <include>**/ClassThatLogsTest.java</include>
+              </includes>
+              <!-- One JVM per test class -->
+              <reuseForks>false</reuseForks>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 
 </project>
