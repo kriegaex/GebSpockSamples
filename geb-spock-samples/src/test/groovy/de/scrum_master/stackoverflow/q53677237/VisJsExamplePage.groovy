@@ -19,8 +19,8 @@ class VisJsExamplePage extends Page {
   }
 
   static content = {
-    item4(cache: false) { $(".vis-item-content", text: "item 4").parent().parent() }
+    item4(cache: false, required: false, wait: 5) { $(".vis-item-content", text: "item 4").parent().parent() }
     fitAllItemsButton(cache: false) { $("#fit") }
-    draggable(cache: false, wait: 2) { $(".vis-drag-center") }
+    draggable(required: false, cache: false, wait: 2) { $(".vis-drag-center") }
   }
 }

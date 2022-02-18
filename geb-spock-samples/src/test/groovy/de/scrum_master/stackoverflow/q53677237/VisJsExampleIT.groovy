@@ -21,6 +21,7 @@ class VisJsExampleIT extends GebReportingSpec {
   })
   def "dragging vis-js module"() {
     given:
+    def toDragX = 200
     def page = to VisJsExamplePage
 
     and:
@@ -28,6 +29,11 @@ class VisJsExampleIT extends GebReportingSpec {
     driver.manage().window().size = new Dimension(200, 200)
     // Resize to make DnD distance more predictable
     driver.manage().window().size = new Dimension(1024, 768)
+
+    and:
+    waitFor 3, {
+      page.item4.displayed
+    }
     def x = page.item4.x
     def y = page.item4.y
 
@@ -46,21 +52,21 @@ class VisJsExampleIT extends GebReportingSpec {
         // Workaround for first mouse movement being ignored on Chromium-based browsers:
         // Dummy-move once before doing the movement we actually want.
         moveByOffset(-100, 0)
-        moveByOffset(200, 0)
+        moveByOffset(toDragX, 0)
         release()
       }
       else {
         // This does not work on Chromium-based browsers, because after the mouse click
         // there should be a dummy mouse movement before actually dragging the target element.
-        dragAndDropBy(page.item4, 200, 0)
+        dragAndDropBy(page.item4, toDragX, 0)
       }
     }
     report "After DnD"
-    def movedByX = page.item4.x - x
-    println "$x/$y -> $page.item4.x/$page.item4.y"
+    def draggedX = page.item4.x - x
+    println "DnD from $x/$y to $page.item4.x/$page.item4.y (planned horizontal drag distance $toDragX, actual $draggedX)"
 
     then:
-    movedByX closeTo(200, 20)
+    draggedX closeTo(toDragX, 20)
   }
 
   def "double clicking test"() {
