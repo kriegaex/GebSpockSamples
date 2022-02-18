@@ -1,8 +1,6 @@
-package de.scrum_master.stackoverflow
-
+package de.scrum_master.stackoverflow.q53677237
 
 import geb.spock.GebReportingSpec
-import org.openqa.selenium.By
 import org.openqa.selenium.interactions.Actions
 
 /**
@@ -24,12 +22,13 @@ class DoubleClickIT extends GebReportingSpec {
   def "double-click via Selenium action"() {
     given:
     def page = to ArtOfTestingPage
-    def doubleClickButton = driver.findElement(By.tagName("button"))
-    def doubleClick = new Actions(driver).doubleClick(doubleClickButton).build()
+    def doubleClickAction = new Actions(driver)
+      .doubleClick(page.doubleClickButton.singleElement())
+      .build()
 
     expect:
-    withAlert {
-      doubleClick.perform()
+    withAlert(wait: 5) {
+      doubleClickAction.perform()
     } == "You double clicked me.. Thank You.."
   }
 }

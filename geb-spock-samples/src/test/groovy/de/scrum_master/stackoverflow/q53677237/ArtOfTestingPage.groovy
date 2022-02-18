@@ -1,4 +1,4 @@
-package de.scrum_master.stackoverflow
+package de.scrum_master.stackoverflow.q53677237
 
 import geb.Page
 
@@ -10,6 +10,6 @@ class ArtOfTestingPage extends Page {
   }
 
   static content = {
-    doubleClickButton(wait: 5) { $("button", text: "Double-Click Me To See Alert") }
+    doubleClickButton(cache: false, required: false, wait: 5) { $("button", text: "Double-Click Me To See Alert") }
   }
 }
