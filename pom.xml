@@ -34,7 +34,6 @@
 
     <!-- Groovy compiler for Spock/Geb tests -->
     <version.groovy-eclipse-compiler>3.7.0</version.groovy-eclipse-compiler>
-<!--    <version.groovy-eclipse-batch>2.5.12-02</version.groovy-eclipse-batch>-->
     <version.groovy-eclipse-batch>2.5.14-02</version.groovy-eclipse-batch>
 
     <!-- Geb, Selenium -->
@@ -117,7 +116,7 @@
             </compilerArguments>
             <!-- Without this Lombok compilation fails -->
             <fork>true</fork>
-            <verbose>true</verbose>
+            <!--<verbose>true</verbose>-->
           </configuration>
           <dependencies>
             <dependency>
