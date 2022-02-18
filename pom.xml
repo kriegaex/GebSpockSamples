@@ -34,7 +34,7 @@
 
     <!-- Groovy compiler for Spock/Geb tests -->
     <version.groovy-eclipse-compiler>3.7.0</version.groovy-eclipse-compiler>
-    <version.groovy-eclipse-batch>2.5.14-02</version.groovy-eclipse-batch>
+    <version.groovy-eclipse-batch>3.0.8-01</version.groovy-eclipse-batch>
 
     <!-- Geb, Selenium -->
     <!-- Possible geb.env values: html_unit, chrome, chrome_headless, firefox, ie, edge, opera, win_app -->
