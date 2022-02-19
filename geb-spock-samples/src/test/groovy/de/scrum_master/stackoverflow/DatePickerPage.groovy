@@ -17,9 +17,9 @@ class DatePickerPage extends Page {
     heading { $("h2 > span.md-breadcrumb-page.ng-binding").text() }
     datePickerButtons { $("md-datepicker > button") }
     datePickerInputFields { $(".md-datepicker-input") }
-    activeDatePicker(required: false) { $(".md-datepicker-calendar-pane.md-pane-open") }
+    activeDatePicker(required: false, wait: 3) { $(".md-datepicker-calendar-pane.md-pane-open") }
     selectedDate { activeDatePicker.$(".md-calendar-selected-date") }
-    currentMonthLabel {
+    currentMonthLabel(required: false, wait: 3) {
       activeDatePicker
         .$("td.md-calendar-month-label", text: "${getMonthShort(now)} ${now.get(YEAR)}")
     }
