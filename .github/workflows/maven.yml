@@ -51,6 +51,8 @@ jobs:
 
       - name: Set up Chrome browser
         uses: browser-actions/setup-chrome@latest
+        with:
+          chrome-version: stable
 
       - name: Print tool versions
         # TODO: 'chrome --version' must be 'chromium --version' on MacOS
