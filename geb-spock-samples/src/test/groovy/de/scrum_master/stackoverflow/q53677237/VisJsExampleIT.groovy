@@ -16,7 +16,7 @@ class VisJsExampleIT extends GebReportingSpec {
   @IgnoreIf({
     sys["geb.env"] in [
       "ie",        // time graph panel is not displayed at all
-      "html_unit"  // JS capabilities are not good enough
+      "html_unit"  // JS capabilities are not good enough in HtmlUnit 2.58.0, Selenium 3.141.59
     ]
   })
   def "dragging vis-js module"() {

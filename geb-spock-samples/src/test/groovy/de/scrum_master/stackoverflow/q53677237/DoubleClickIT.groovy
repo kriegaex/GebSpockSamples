@@ -2,14 +2,14 @@ package de.scrum_master.stackoverflow.q53677237
 
 import geb.spock.GebReportingSpec
 import org.openqa.selenium.interactions.Actions
-import spock.lang.Requires
+import spock.lang.IgnoreIf
 
 /**
  * See https://stackoverflow.com/a/53908366/1082681
  */
-@Requires({
+@IgnoreIf({
   // TODO: This test is flaky on GitHub under MacOS, no idea why.
-  os.windows || os.linux
+  os.macOs
 })
 class DoubleClickIT extends GebReportingSpec {
   def "double-click via Geb interaction"() {

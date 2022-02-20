@@ -2,6 +2,7 @@ package de.scrum_master.testing
 
 import geb.navigator.Navigator
 import geb.spock.GebReportingSpec
+import org.openqa.selenium.TakesScreenshot
 import org.openqa.selenium.WebElement
 import pazone.ashot.AShot
 import pazone.ashot.Screenshot
@@ -43,6 +44,10 @@ class AShotReportingSpec extends GebReportingSpec {
   }
 
   private void reportAShot(String label, Navigator... navigators) {
+    if (!(driver instanceof TakesScreenshot)) {
+      System.err.println("Driver type ${driver.class.name} cannot take screenshots")
+      return
+    }
     // Hide scroll bars for clean screenshots
     String scrollBarMode = js.exec("return document.body.style.overflow")
     js.exec("document.body.style.overflow = 'hidden'")
@@ -51,7 +56,7 @@ class AShotReportingSpec extends GebReportingSpec {
       // Get all elements from multi-element navigators into flattened list
       List<WebElement> webElements = navigators*.allElements().flatten()
       Screenshot screenshot = aShot.takeScreenshot(driver, webElements)
-      File imageFile = new File(browser.reportGroupDir, createReportLabel(label) + ".png")
+      File imageFile = new File(browser.reportGroupDir, testManager.createReportLabel(label) + ".png")
       ImageIO.write(screenshot.image, "PNG", imageFile)
     }
     finally {

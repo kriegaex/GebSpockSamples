@@ -3,7 +3,7 @@ package de.scrum_master.stackoverflow
 import geb.module.FormElement
 import geb.spock.GebReportingSpec
 import org.openqa.selenium.support.ui.ExpectedConditions
-import spock.lang.Requires
+import spock.lang.IgnoreIf
 import spock.lang.Unroll
 
 import static java.util.Calendar.*
@@ -11,9 +11,10 @@ import static java.util.Calendar.*
 /**
  * See http://stackoverflow.com/a/42392006/1082681
  */
-@Requires({
+@IgnoreIf({
   // TODO: This test is flaky on GitHub under MacOS, no idea why.
-  os.windows || os.linux
+  os.macOs ||
+    sys["geb.env"] == "html_unit"  // JS capabilities are not good enough in HtmlUnit 2.58.0, Selenium 3.141.59
 })
 class DatePickerIT extends GebReportingSpec {
   def now = new GregorianCalendar()

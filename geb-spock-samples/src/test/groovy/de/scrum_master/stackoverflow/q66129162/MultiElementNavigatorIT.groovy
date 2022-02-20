@@ -12,12 +12,16 @@ class MultiElementNavigatorIT extends GebSpec {
     given:
     go url
     def selector = selectorClosure()
+    def longText = " Student Information\nStudent: Foo Bar\nClass X\nSection A"
+    // HtmlUnit does not preserve line feeds when concatenating multi-element texts
+    if (driver.class.simpleName.contains("HtmlUnitDriver"))
+      longText = longText.replace("\n", " ")
 
     expect:
     selector.text() == "Student:"
     selector.parent().text() == "Student:"
     selector.parent().parent().text() == "Student: Foo Bar"
-    selector.parent().parent().parent().text() == " Student Information\nStudent: Foo Bar\nClass X\nSection A"
+    selector.parent().parent().parent().text() == longText
 
     where:
     selectorType | selectorClosure

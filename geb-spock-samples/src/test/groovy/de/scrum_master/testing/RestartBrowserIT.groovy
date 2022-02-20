@@ -16,7 +16,7 @@ class RestartBrowserIT extends GebReportingSpec {
     $("h2").text().startsWith("Herzlich Willkommen bei Scrum-Master.de")
 
     when:_ "browser is reset"
-    resetBrowser()
+    testManager.resetBrowser()
     CachingDriverFactory.clearCacheAndQuitDriver()
 
     and:_ "download page is opened again in new browser"

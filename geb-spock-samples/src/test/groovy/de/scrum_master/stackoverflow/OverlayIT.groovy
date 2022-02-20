@@ -9,7 +9,7 @@ import spock.lang.IgnoreIf
   sys["geb.env"] in [
     "ie",         // Selenium IE Driver does not support 'file://' URLs
     "phantomjs",  // PhantomJS does not throw "not clickable" exception when element is overlayed
-    "html_unit"   // HTMLUnit's JS support is not fancy enough for overlays
+    "html_unit"   // HTMLUnit's JS support is not fancy enough for overlays in HtmlUnit 2.58.0, Selenium 3.141.59
   ]
 })
 class OverlayIT extends GebReportingSpec {
