@@ -14,7 +14,7 @@ class VisJsExamplePage extends Page {
   static atCheckWaiting = true
   static at = {
     title.contains("Animate window") && fitAllItemsButton.displayed
-      // Does not work on Chromium browsers, because time graph only loaded after manually resizing the window
+      // Does not work on Chromium browsers, because time graph is only loaded after manually resizing the window
       // && item4.displayed
   }
 

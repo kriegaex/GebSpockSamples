@@ -10,16 +10,16 @@ import static java.util.Calendar.*
 
 class DatePickerPage extends Page {
   static url = "https://material.angularjs.org/1.1.2/demo/datepicker"
-  static at = { heading == "Datepicker" }
+  static at = { heading == "Datepicker" && datePickerButtons.size() > 0 && datePickerInputFields.size() > 0}
   static now = new GregorianCalendar()
 
   static content = {
     heading { $("h2 > span.md-breadcrumb-page.ng-binding").text() }
-    datePickerButtons(wait: 5) { $("md-datepicker > button") }
-    datePickerInputFields(wait: 5) { $(".md-datepicker-input") }
-    activeDatePicker(required: false, wait: 3) { $(".md-datepicker-calendar-pane.md-pane-open") }
+    datePickerButtons(cache: false, wait: 5) { $("md-datepicker > button") }
+    datePickerInputFields(cache: false, wait: 5) { $(".md-datepicker-input") }
+    activeDatePicker(required: false, cache: false, wait: 3) { $(".md-datepicker-calendar-pane.md-pane-open") }
     selectedDate { activeDatePicker.$(".md-calendar-selected-date") }
-    currentMonthLabel(required: false, wait: 3) {
+    currentMonthLabel(required: false, cache: false, wait: 3) {
       activeDatePicker
         .$("td.md-calendar-month-label", text: "${getMonthShort(now)} ${now.get(YEAR)}")
     }
