@@ -7,6 +7,11 @@
 
   <!-- Avoid Apache HttpClient logging, e.g. via FirefoxDriver -->
   <logger name="org.apache.http" level="WARN" />
+  <!--
+    Avoid excessive logging of warnings about limitations in HtmlUnit's own CSS parser,
+    see https://github.com/HtmlUnit/htmlunit/issues/446
+  -->
+  <logger name="com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet" level="ERROR" />
 
   <root level="INFO">
     <appender-ref ref="STDOUT" />
