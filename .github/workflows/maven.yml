@@ -51,6 +51,7 @@ jobs:
           distribution: adopt-hotspot
 
       - name: Set up Chrome browser
+        if: ${{ matrix.gebEnv  == 'chrome_headless' }}
         uses: browser-actions/setup-chrome@latest
         with:
           chrome-version: stable
