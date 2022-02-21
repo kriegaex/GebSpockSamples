@@ -705,12 +705,6 @@
       <version>6.1.0</version>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>org.seleniumhq.selenium</groupId>
-      <artifactId>selenium-remote-driver</artifactId>
-      <version>3.14.0</version>
-      <scope>test</scope>
-    </dependency>
 
     <!-- Reactor (for https://stackoverflow.com/q/56064582) -->
     <dependency>
