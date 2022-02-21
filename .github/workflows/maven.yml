@@ -1,7 +1,7 @@
 name: Java CI
 
 on:
-  workflow_dispatch: {}
+  workflow_dispatch: { }
   push:
     branches:
       - '*'
@@ -18,7 +18,12 @@ jobs:
       matrix:
         os: [ ubuntu-latest, windows-latest, macOS-latest ]
         javaVersion: [ 8, 11, 17 ]
-        gebEnv: [ chrome_headless, html_unit ]
+        gebEnv: [ chrome_headless, firefox_headless, html_unit ]
+        exclude:
+          # Firefox install action is currently not working on Windows,
+          # see https://github.com/browser-actions/setup-firefox/issues/252
+          - os: windows-latest
+            gebEnv: firefox_headless
       fail-fast: false
 
     runs-on: ${{ matrix.os }}
@@ -55,6 +60,14 @@ jobs:
         uses: browser-actions/setup-chrome@latest
         with:
           chrome-version: stable
+
+      - name: Set up Firefox browser
+        # This action is currently not working on Windows,
+        # see https://github.com/browser-actions/setup-firefox/issues/252
+        if: ${{ matrix.gebEnv == 'firefox_headless' }}
+        uses: browser-actions/setup-firefox@latest
+        with:
+          firefox-version: latest
 
       - name: Print tool versions
         # TODO: 'chrome --version' must be 'chromium --version' on MacOS
