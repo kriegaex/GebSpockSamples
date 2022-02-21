@@ -85,9 +85,9 @@ jobs:
           mvn --batch-mode --version
 
       - name: Build with Maven
-        # Chrome Headless does not need Xvfb
-        # TODO: When also using other browsers, we need Xvfb on Linux
-        run: mvn -U --batch-mode -P github "-Dgeb.env=${{ matrix.gebEnv }}" -fae clean verify
+        # Chrome Headless, Firefox Headless and HtmlUnit do not need Xvfb.
+        # TODO: When also using other browsers, we need Xvfb on Linux.
+        run: mvn -U --batch-mode -P github "-Dgeb.env=${{ matrix.gebEnv }}" "-Dwdm.gitHubToken=${{ secrets.GITHUB_TOKEN }}" -fae clean verify
 
       # No matter if a preceding test run failed or not, try to generate and upload a test report
       # TODO: these steps should only happen if at least the build without tests passed, not always
