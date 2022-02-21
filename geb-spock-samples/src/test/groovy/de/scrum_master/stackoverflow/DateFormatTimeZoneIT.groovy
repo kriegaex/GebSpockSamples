@@ -180,8 +180,9 @@ class DateFormatTimeZoneIT extends GebReportingSpec {
     println "Initial window"
 
     when:
-    int resizeWidth = 250
-    int resizeHeight = 200
+    // Caveat: Do not select a width < 460 px for Firefox
+    int resizeWidth = 500
+    int resizeHeight = 375
     driver.manage().window().size = new Dimension(resizeWidth, resizeHeight)
     def windowSize = driver.manage().window().size
     println "Window size = $windowSize"
@@ -193,8 +194,8 @@ class DateFormatTimeZoneIT extends GebReportingSpec {
     windowSize.height == resizeHeight
 
     when:
-    resizeWidth = 444
-    resizeHeight = 333
+    resizeWidth = 800
+    resizeHeight = 600
     driver.manage().window().size = new Dimension(resizeWidth, resizeHeight)
     windowSize = driver.manage().window().size
     println "Window size = $windowSize"

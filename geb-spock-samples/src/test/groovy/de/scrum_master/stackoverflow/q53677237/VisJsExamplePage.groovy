@@ -3,8 +3,8 @@ package de.scrum_master.stackoverflow.q53677237
 import geb.Page
 
 class VisJsExamplePage extends Page {
-  // For an unknown reason, the "Chrome is being controlled by automated test software" notification this pages from
-  // loading correctly. The buttons on the top are visible, but the time graph on the bottom only appears after the
+  // For an unknown reason, the "Chrome is being controlled by automated test software" notification keeps this pages
+  // from loading correctly. The buttons on the top are visible, but the time graph on the bottom only appears after the
   // page is resized hotizontally. Therefore, when configuring the Chrome driver in GebConfig.groovy, an option like
   //   options.setExperimentalOption("excludeSwitches", ["enable-automation"])
   // for recent Chrome versions or the now deprecated
