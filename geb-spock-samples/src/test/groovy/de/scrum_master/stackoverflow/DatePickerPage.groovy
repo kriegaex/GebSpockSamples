@@ -15,8 +15,8 @@ class DatePickerPage extends Page {
 
   static content = {
     heading { $("h2 > span.md-breadcrumb-page.ng-binding").text() }
-    datePickerButtons(wait: 3) { $("md-datepicker > button") }
-    datePickerInputFields(wait: 3) { $(".md-datepicker-input") }
+    datePickerButtons(wait: 5) { $("md-datepicker > button") }
+    datePickerInputFields(wait: 5) { $(".md-datepicker-input") }
     activeDatePicker(required: false, wait: 3) { $(".md-datepicker-calendar-pane.md-pane-open") }
     selectedDate { activeDatePicker.$(".md-calendar-selected-date") }
     currentMonthLabel(required: false, wait: 3) {
