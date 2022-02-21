@@ -1,9 +1,7 @@
 package de.scrum_master.stackoverflow
 
 import de.scrum_master.testing.GebTestHelper
-import geb.navigator.Navigator
 import geb.spock.GebReportingSpec
-import org.openqa.selenium.Alert
 import org.openqa.selenium.Dimension
 import spock.lang.Requires
 
@@ -233,6 +231,9 @@ class DateFormatTimeZoneIT extends GebReportingSpec {
     at DateFormatTimeZonePage
 
     when:
+    // We can use a relative URL here, because the Maven Failsafe plugin configuration contains:
+    // systemPropertyVariables -> geb.build.baseUrl -> https://scrum-master.de
+    // See http://www.gebish.org/manual/current/#configuration-base-url.
     go "/Presse/blog"
     report "Presse"
 
