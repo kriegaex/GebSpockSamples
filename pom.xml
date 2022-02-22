@@ -263,8 +263,15 @@
             </systemPropertyVariables>
             <argLine>
               -Dfile.encoding=UTF8
+              <!-- Help libraries using restricted JDK APIs on JDK 9+ (mostly 16+) -->
               ${jvm.arg.addOpens}
+              <!-- Help Java find native libraries for JNI tests -->
               -Djava.library.path=${basedir}/src/main/resources/lib
+              <!--
+                Not really necessary. The default target bytecode level in Groovy 2.5.x is 1.7.
+                This setting influences e.g. EmbeddedSpecRunner or other dynamically compiled code.
+              -->
+              -Dgroovy.target.bytecode=${maven.compiler.target}
               -javaagent:"${settings.localRepository}"/org/jmockit/jmockit/${version.jmockit}/jmockit-${version.jmockit}.jar
             </argLine>
           </configuration>
@@ -297,8 +304,15 @@
                   Otherwise arguments for Surefire and Failsafe appear 2x on the command line.
               -->
               -Dfile.encoding=UTF8
+              <!-- Help libraries using restricted JDK APIs on JDK 9+ (mostly 16+) -->
               ${jvm.arg.addOpens}
+              <!-- Help Java find native libraries for JNI tests -->
               -Djava.library.path=${basedir}/src/main/resources/lib
+              <!--
+                Not really necessary. The default target bytecode level in Groovy 2.5.x is 1.7.
+                This setting influences e.g. EmbeddedSpecRunner or other dynamically compiled code.
+              -->
+              -Dgroovy.target.bytecode=${maven.compiler.target}
               -javaagent:"${settings.localRepository}"/org/jmockit/jmockit/${version.jmockit}/jmockit-${version.jmockit}.jar
             </argLine>
           </configuration>
@@ -499,6 +513,10 @@
           <exclusion>
             <groupId>net.sourceforge.htmlunit</groupId>
             <artifactId>htmlunit</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
           </exclusion>
         </exclusions>
       </dependency>
