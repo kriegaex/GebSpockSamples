@@ -19,11 +19,12 @@ jobs:
         os: [ ubuntu-latest, windows-latest, macOS-latest ]
         javaVersion: [ 8, 11, 17 ]
         gebEnv: [ chrome_headless, firefox_headless, html_unit ]
-        #exclude:
-          # Firefox install action is currently not working on Windows,
-          # see https://github.com/browser-actions/setup-firefox/issues/252
-          #- os: windows-latest
-          #  gebEnv: firefox_headless
+        exclude:
+          # Both Firefox install actions I tried are currently not working on Windows, see
+          #   * https://github.com/browser-actions/setup-firefox/issues/252
+          #   * https://github.com/abhi1693/setup-browser/issues/8
+          - os: windows-latest
+            gebEnv: firefox_headless
       fail-fast: false
 
     runs-on: ${{ matrix.os }}
