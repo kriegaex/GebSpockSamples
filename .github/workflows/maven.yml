@@ -88,7 +88,7 @@ jobs:
       - name: Build with Maven
         # Chrome Headless, Firefox Headless and HtmlUnit do not need Xvfb.
         # TODO: When also using other browsers, we need Xvfb on Linux.
-        run: mvn -U --batch-mode -P github -fae "-Dgeb.env=${{ matrix.gebEnv }}" "-Dwdm.gitHubToken=${{ secrets.GITHUB_TOKEN }}" "-Dsurefire.rerunFailingTestsCount=2" "-Dfailsafe.rerunFailingTestsCount=2" clean verify
+        run: mvn -U --batch-mode -P github -fae "-Dgeb.env=${{ matrix.gebEnv }}" "-Dwdm.gitHubToken=${{ secrets.GITHUB_TOKEN }}" clean verify
 
       # No matter if a preceding test run failed or not, try to generate and upload a test report
       # TODO: these steps should only happen if at least the build without tests passed, not always

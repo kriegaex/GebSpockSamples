@@ -52,9 +52,8 @@
     <!-- TODO: keep up to date with Sarek's version -->
     <version.byte-buddy>1.12.8</version.byte-buddy>
     <!--
-      Any 2.20+ version creates dump files and reports them on the console, which is really annoying.
-      So we stick with the latest version which both supports 'rerunFailingTestsCount' on JUnit 4 (Spock 1.3)
-      and does not create those annoying dump files, but reports native output correclty on the console.
+      Surefire 2.20+ creates dump files containing native log output, which is really annoying. So we stick with the
+      latest version which does not create dump files, but correctly prints native output to the console.
       TODO: Use 3.0.0-M6 when native console problems from M5 have been fixed.
     -->
     <version.surefire>2.19.1</version.surefire>
