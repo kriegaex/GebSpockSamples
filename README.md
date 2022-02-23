@@ -1,5 +1,7 @@
 # Geb + Spock sample project
 
+[![Java CI](https://github.com/kriegaex/GebSpockSamples/actions/workflows/maven.yml/badge.svg)](https://github.com/kriegaex/GebSpockSamples/actions/workflows/maven.yml)
+
 This project shows how to easily use Geb + Spock in Maven projects and thereby keeping the Maven POM clean,
 utilising a BoM for test dependency versions plus a single test dependency to transitively import all other
 dependencies needed for multi-browser Geb tests.
