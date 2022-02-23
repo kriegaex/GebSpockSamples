@@ -37,7 +37,12 @@
     <version.groovy-eclipse-batch>2.5.14-02</version.groovy-eclipse-batch>
 
     <!-- Geb, Selenium -->
-    <!-- Possible geb.env values: html_unit, chrome, chrome_headless, firefox, firefox_headless, ie, edge, opera, win_app -->
+    <!--
+      Possible geb.env values:
+        * Headless browsers: html_unit, chrome_headless, firefox_headless
+        * Regular browsers: chrome, firefox, ie, edge, opera
+        * Others: win_app
+    -->
     <geb.env>chrome_headless</geb.env>
     <geb.env.deployment>production</geb.env.deployment>
     <!-- MavenSystemPropertyIT needs this-->

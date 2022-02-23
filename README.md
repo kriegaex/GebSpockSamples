@@ -56,12 +56,14 @@ in the test resources. Currently we have these:
   This is also used as a fall-back if `geb.env` is unspecified or misspelled. HtmlUnit is somewhat limited and
   might fail on fancy web pages, but much more useful than I initially thought. It is worth a try for simple
   headless tests.
-* `chrome_headless` - Google Chrome's headless browser is what you want to use, if you need a full-featured browser
-  engine without all the nasty windows popping up on your workstation during tests. This engine replaces the previously
-  supported PhantomJS, which has been removed from the Geb configuration.
+* `chrome_headless` - Google Chrome's headless mode is what you want to use, if you need a full-featured browser engine
+  without all the nasty windows popping up on your workstation during tests. This is the default setting for Maven 
+  builds. Make sure that Chrome is installed locally.
+* `firefox_headless` - Mozilla Firefox's headless mode is a good alternative for Chrome headless, also being a
+  full-featured browser engine. Make sure that FF is installed locally.
 * `chrome` - Google Chrome in normal (non-headless) mode. Make sure that Chrome is installed locally.
-* `firefox` - Mozilla Firefox. Make sure that FF is installed locally.
+* `firefox` - Mozilla Firefox in normal (non-headless) mode. Make sure that FF is installed locally.
 * `ie` - Microsoft Internet Explorer. Make sure that IE is installed locally.
 * `edge` - Microsoft Edge. Make sure that Edge is installed locally.
-* `opera` - Opera. Make sure that Opera (current, not legacy version) is installed locally.
+* `opera` - Opera. Make sure that Opera (Chromium-based current version, not legacy engine) is installed locally.
 * `win_app` - Appium Windows driver (used for Windows Calculator demo test)
