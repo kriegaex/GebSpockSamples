@@ -13,6 +13,9 @@ on:
 
 jobs:
   build:
+    # No automatic builds for Dependabot PRs
+    # Caveat: cannot start 'if:' expression with '!', hence '!= true'
+    if: startsWith(github.actor, 'dependabot') != true
 
     strategy:
       matrix:
