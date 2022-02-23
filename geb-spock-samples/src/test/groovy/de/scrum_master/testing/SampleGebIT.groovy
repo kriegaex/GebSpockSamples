@@ -4,11 +4,13 @@ import geb.driver.CachingDriverFactory
 import geb.spock.GebReportingSpec
 import org.openqa.selenium.Keys
 import org.spockframework.runtime.model.FeatureInfo
+import spock.lang.Retry
 import spock.lang.Shared
 
 /**
  * See http://stackoverflow.com/questions/42069291
  */
+@Retry
 class SampleGebIT extends GebReportingSpec {
 
   @Override

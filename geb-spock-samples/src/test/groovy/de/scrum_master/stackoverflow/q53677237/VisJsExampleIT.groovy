@@ -3,6 +3,7 @@ package de.scrum_master.stackoverflow.q53677237
 import geb.spock.GebReportingSpec
 import org.openqa.selenium.Dimension
 import spock.lang.IgnoreIf
+import spock.lang.Retry
 
 import static spock.util.matcher.HamcrestMatchers.closeTo
 
@@ -11,6 +12,7 @@ import static spock.util.matcher.HamcrestMatchers.closeTo
  * https://bugs.chromium.org/p/chromedriver/issues/detail?id=841
  * https://stackoverflow.com/a/54020579/1082681
  */
+@Retry
 class VisJsExampleIT extends GebReportingSpec {
 
   @IgnoreIf({

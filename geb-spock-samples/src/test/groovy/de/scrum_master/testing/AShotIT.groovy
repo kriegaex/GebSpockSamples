@@ -1,7 +1,9 @@
 package de.scrum_master.testing
 
 import org.openqa.selenium.Dimension
+import spock.lang.Retry
 
+@Retry
 class AShotIT extends AShotReportingSpec {
   def "Visit Scrum-Master.de download page"() {
     when:

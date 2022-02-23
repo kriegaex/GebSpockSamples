@@ -4,7 +4,9 @@ import de.scrum_master.testing.GebTestHelper
 import geb.spock.GebReportingSpec
 import org.openqa.selenium.Dimension
 import spock.lang.Requires
+import spock.lang.Retry
 
+@Retry
 class DateFormatTimeZoneIT extends GebReportingSpec {
   def "Check texts for selected drop-down elements"() {
     given:

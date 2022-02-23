@@ -2,10 +2,12 @@ package de.scrum_master.testing
 
 import geb.driver.CachingDriverFactory
 import geb.spock.GebReportingSpec
+import spock.lang.Retry
 
 /**
  * See http://stackoverflow.com/questions/42069291
  */
+@Retry
 class RestartBrowserIT extends GebReportingSpec {
   def "Search web site Scrum-Master.de"() {
     when:_ "download page is opened"

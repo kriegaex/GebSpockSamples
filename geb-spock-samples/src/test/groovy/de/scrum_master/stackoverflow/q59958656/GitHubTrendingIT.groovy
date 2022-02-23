@@ -1,7 +1,9 @@
 package de.scrum_master.stackoverflow.q59958656
 
 import geb.spock.GebReportingSpec
+import spock.lang.Retry
 
+@Retry
 class GitHubTrendingIT extends GebReportingSpec {
   def test() {
     given:

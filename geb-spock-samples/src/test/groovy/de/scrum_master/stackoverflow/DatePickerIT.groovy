@@ -4,6 +4,7 @@ import geb.module.FormElement
 import geb.spock.GebReportingSpec
 import org.openqa.selenium.support.ui.ExpectedConditions
 import spock.lang.IgnoreIf
+import spock.lang.Retry
 import spock.lang.Unroll
 
 import static java.util.Calendar.*
@@ -16,6 +17,7 @@ import static java.util.Calendar.*
   os.macOs ||
     sys["geb.env"] == "html_unit"  // JS capabilities are not good enough in HtmlUnit 2.58.0, Selenium 3.141.59
 })
+@Retry
 class DatePickerIT extends GebReportingSpec {
   def now = new GregorianCalendar()
   def xmas = new GregorianCalendar(now.get(YEAR), 12 - 1, 25)
