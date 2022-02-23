@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
  * The class to be tested
  */
 @Service
-public class ServiceForTest extends AbstractComponent {
+public class MyService extends AbstractComponent {
   public String methodForTest(String s) {
     return someService.generateString(s);
   }

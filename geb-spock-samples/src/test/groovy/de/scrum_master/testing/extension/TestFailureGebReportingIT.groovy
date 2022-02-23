@@ -4,8 +4,13 @@ import geb.spock.GebSpec
 import spock.lang.Ignore
 import spock.lang.Unroll
 
+/**
+ * If you want to see screenshots taken via global extension {@link TestFailureScreenshotExtension}, make sure
+ * to activate <tt>de.scrum_master.testing.extension.TestFailureScreenshotExtension</tt> in
+ * <i>src/test/resources/META-INF/services/org.spockframework.runtime.extension.IGlobalExtension</i>.
+ */
 @Ignore("test fails on purpose; activate if you want to see screenshots taken via global extension")
-class TestFailureGebReportingTest extends GebSpec {
+class TestFailureGebReportingIT extends GebSpec {
   static url = this.getResource("/simple-form-page.html").toString()
 
   def "failing normal feature"() {
