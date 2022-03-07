@@ -525,7 +525,7 @@
       <dependency>
         <groupId>org.jenkins-ci.main</groupId>
         <artifactId>jenkins-core</artifactId>
-        <version>2.334</version>
+        <version>2.337</version>
         <scope>test</scope>
         <exclusions>
           <exclusion>
@@ -701,7 +701,7 @@
     <dependency>
       <groupId>commons-validator</groupId>
       <artifactId>commons-validator</artifactId>
-      <version>1.6</version>
+      <version>1.7</version>
     </dependency>
 
     <!-- Contains ByteBuddy transitive dependency -->
