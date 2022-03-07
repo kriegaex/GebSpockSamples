@@ -514,6 +514,13 @@
         <!--<version>2.1.5</version>-->
         <!-- TODO: Bump version after https://github.com/ExpediaGroup/jenkins-spock/pull/111 was merged and released -->
         <version>2.1.6-SNAPSHOT</version>
+        <scope>test</scope>
+        <exclusions>
+          <exclusion>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+          </exclusion>
+        </exclusions>
       </dependency>
       <dependency>
         <groupId>org.jenkins-ci.main</groupId>
