@@ -10,7 +10,7 @@ import spock.lang.Specification
  * in Maven Surefire/Failsafe 'argLine' option
  */
 @Requires({ os.windows || os.linux })
-class BaledungJNITest extends Specification {
+class BaeldungJNITest extends Specification {
   def "verify original native method"() {
     given:
     HelloWorldJNI helloWorld = new HelloWorldJNI()
