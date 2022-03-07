@@ -21,7 +21,7 @@ jobs:
       matrix:
         os: [ ubuntu-latest, windows-latest, macOS-latest ]
         javaVersion: [ 8, 11, 17 ]
-        gebEnv: [ chrome_headless, firefox_headless, html_unit ]
+        gebEnv: [ html_unit ]
         exclude:
           # Both Firefox install actions I tried are currently not working on Windows, see
           #   * https://github.com/browser-actions/setup-firefox/issues/252
@@ -59,50 +59,5 @@ jobs:
           java-version: ${{ matrix.javaVersion }}
           distribution: adopt-hotspot
 
-      - name: Set up Chrome browser
-        if: ${{ matrix.gebEnv  == 'chrome_headless' }}
-        uses: browser-actions/setup-chrome@latest
-        with:
-          chrome-version: stable
-
-      - name: Set up Firefox browser
-        # This action is currently not working on Windows,
-        # see https://github.com/browser-actions/setup-firefox/issues/252
-        if: ${{ matrix.gebEnv == 'firefox_headless' && matrix.os != 'windows-latest' }}
-        uses: browser-actions/setup-firefox@latest
-        with:
-          firefox-version: latest
-
-      - name: Set up Firefox browser
-        # Fill the gap left behind by browser-actions/setup-firefox, at least temporarily,
-        # see https://github.com/browser-actions/setup-firefox/issues/252
-        if: ${{ matrix.gebEnv == 'firefox_headless' && matrix.os == 'windows-latest' }}
-        uses: abhi1693/setup-browser@main
-        with:
-          browser: firefox
-          version: latest
-
-      - name: Print tool versions
-        # TODO: 'chrome --version' must be 'chromium --version' on MacOS
-        run: |
-          java -version
-          mvn --batch-mode --version
-
       - name: Build with Maven
-        # Chrome Headless, Firefox Headless and HtmlUnit do not need Xvfb.
-        # TODO: When also using other browsers, we need Xvfb on Linux.
-        run: mvn -U --batch-mode -P github -fae "-Dgeb.env=${{ matrix.gebEnv }}" "-Dwdm.gitHubToken=${{ secrets.GITHUB_TOKEN }}" clean verify
-
-      # No matter if a preceding test run failed or not, try to generate and upload a test report
-      # TODO: these steps should only happen if at least the build without tests passed, not always
-
-      - name: Generate aggregate test report
-        if: always()
-        run: mvn --batch-mode -P github -Daggregate=true surefire-report:report-only
-
-      - name: Attach aggregate test report to build
-        if: always()
-        uses: actions/upload-artifact@v2
-        with:
-          name: surefire-report-${{ matrix.os }}-java${{ matrix.javaVersion }}-${{ matrix.gebEnv }}
-          path: target/site/surefire-report.html
+        run: mvn -U --batch-mode -P github -fae "-Dgeb.env=${{ matrix.gebEnv }}" "-Dwdm.gitHubToken=${{ secrets.GITHUB_TOKEN }}" -am -pl geb-spock-samples test -Dtest=SetGroovyPropertyTest -DfailIfNoTests=false
