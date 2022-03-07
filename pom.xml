@@ -33,7 +33,7 @@
     <maven.compiler.target>1.8</maven.compiler.target>
 
     <!-- Groovy compiler for Spock/Geb tests -->
-    <version.groovy-eclipse-compiler>3.7.0</version.groovy-eclipse-compiler>
+    <version.groovy-eclipse-compiler>3.7.1</version.groovy-eclipse-compiler>
     <version.groovy-eclipse-batch>2.5.14-02</version.groovy-eclipse-batch>
 
     <!-- Geb, Selenium -->
@@ -65,11 +65,11 @@
   </properties>
 
   <pluginRepositories>
-    <!-- Needed for latest Groovy Eclipse version -->
+    <!-- Latest Groovy Eclipse version -->
     <pluginRepository>
-      <id>bintray</id>
-      <name>Groovy Bintray</name>
-      <url>https://dl.bintray.com/groovy/maven</url>
+      <id>groovy-plugins-release</id>
+      <name>JFrog Groovy Plugins Releases</name>
+      <url>https://groovy.jfrog.io/artifactory/plugins-release</url>
       <releases>
         <updatePolicy>never</updatePolicy>
       </releases>
