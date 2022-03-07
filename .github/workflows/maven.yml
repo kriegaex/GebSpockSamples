@@ -57,7 +57,7 @@ jobs:
         uses: actions/setup-java@v2.5.0
         with:
           java-version: ${{ matrix.javaVersion }}
-          distribution: adopt-hotspot
+          distribution: temurin
 
       - name: Set up Chrome browser
         if: ${{ matrix.gebEnv  == 'chrome_headless' }}
