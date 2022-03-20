@@ -20,7 +20,8 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-latest, windows-latest, macOS-latest ]
-        javaVersion: [ 8, 11, 17 ]
+#        javaVersion: [ 8, 11, 17 ]
+        javaVersion: [ 11 ]
         gebEnv: [ html_unit ]
         exclude:
           # Both Firefox install actions I tried are currently not working on Windows, see
