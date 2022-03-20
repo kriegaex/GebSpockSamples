@@ -65,3 +65,10 @@ jobs:
 
       - name: Build with Maven
         run: mvn -U --batch-mode -P github -fae "-Dgeb.env=${{ matrix.gebEnv }}" "-Dwdm.gitHubToken=${{ secrets.GITHUB_TOKEN }}" -am -pl geb-spock-samples test -Dtest=SetGroovyPropertyTest -DfailIfNoTests=false
+
+      - name: Attach target directory to build
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: target-dir-${{ matrix.os }}-java${{ matrix.java }}
+          path: geb-spock-samples/target/
