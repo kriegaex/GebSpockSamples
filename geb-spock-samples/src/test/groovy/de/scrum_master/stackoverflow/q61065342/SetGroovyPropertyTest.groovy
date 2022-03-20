@@ -1,11 +1,13 @@
 package de.scrum_master.stackoverflow.q61065342
 
 import spock.lang.IgnoreIf
+import spock.lang.Issue
 import spock.lang.Specification
 
 /**
  * https://stackoverflow.com/q/61065342/1082681
  */
+@Issue("https://github.com/groovy/groovy-eclipse/issues/1353")
 class SetGroovyPropertyTest extends Specification {
   // TODO: Fix problem on Linux GitHub CI. Is it Groovy or Spock?
   @IgnoreIf({ os.linux })
