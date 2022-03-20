@@ -60,5 +60,8 @@ jobs:
           java-version: ${{ matrix.javaVersion }}
           distribution: temurin
 
+      - name: Maven dependency tree
+        run: mvn -U --batch-mode -P github -fae "-Dgeb.env=${{ matrix.gebEnv }}" "-Dwdm.gitHubToken=${{ secrets.GITHUB_TOKEN }}" -am -pl geb-spock-samples dependency:tree
+
       - name: Build with Maven
         run: mvn -U --batch-mode -P github -fae "-Dgeb.env=${{ matrix.gebEnv }}" "-Dwdm.gitHubToken=${{ secrets.GITHUB_TOKEN }}" -am -pl geb-spock-samples test -Dtest=SetGroovyPropertyTest -DfailIfNoTests=false
