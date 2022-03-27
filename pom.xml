@@ -399,7 +399,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-dependency-plugin</artifactId>
-          <version>3.2.0</version>
+          <version>3.3.0</version>
         </plugin>
 
         <plugin>
@@ -553,7 +553,7 @@
       <dependency>
         <groupId>org.jenkins-ci</groupId>
         <artifactId>symbol-annotation</artifactId>
-        <version>1.10</version>
+        <version>1.23</version>
         <scope>test</scope>
       </dependency>
 
