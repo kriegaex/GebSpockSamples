@@ -7,9 +7,9 @@ class MoneyCnnFearAndGreedIT extends GebReportingSpec {
     given:
     to MoneyCnnFearAndGreedPage
     when:
-    def result = js.exec("return document.querySelectorAll('#needleChart ul li')[0].textContent;")
+    String result = js.exec("return document.querySelectorAll('#needleChart ul li')[0].textContent;")
     println result
     then:
-    result.contains("Fear & Greed Now")
+    result.toLowerCase() =~ /fear (&|and) greed now/
   }
 }
