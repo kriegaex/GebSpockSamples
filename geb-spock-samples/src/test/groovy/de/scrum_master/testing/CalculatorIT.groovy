@@ -11,19 +11,28 @@ import java.text.NumberFormat
 import static java.text.NumberFormat.getInstance
 
 /**
- * Adapted from an example found at https://github.com/Microsoft/WinAppDriver
- * and made to work with non-English calculator versions, too (tested with German)
+ * Adapted from an example found at the <a href="https://github.com/Microsoft/WinAppDriver">WinAppDriver GitHub page</a>
+ * and made to work with non-English calculator versions, too (tested with German).
  *
  * Before running this test, prepare according to the above GitHub read-me:
- *   - Activate developer mode:
- *     https://docs.microsoft.com/en-us/windows/uwp/get-started/enable-your-device-for-development
- *   - Install + start Windows Driver:
- *     c:\Program Files (x86)\Windows Application Driver\WinAppDriver.exe [port, default 4723]
- *   - If default port 4723 is blocked, change it in GebConfig.groovy (in MavenTestResources) or find the service
+ * <ul>
+ *   <li>
+ *     <a href="https://docs.microsoft.com/en-us/windows/uwp/get-started/enable-your-device-for-development">
+ *     Activate developer mode</a>
+ *   </li>
+ *   <li>
+ *     Install + start Windows Driver (needs admin mode, elevanted console):<br>
+ *     <tt>c:\Program Files (x86)\Windows Application Driver\WinAppDriver.exe [port, default 4723]</tt>
+ *   </li>
+ *   <li>
+ *     If default port 4723 is blocked, change it in <i>GebConfig.groovy</i> (in MavenTestResources) or find the service
  *     blocking it and shut it down.
- *   - Windows Calculator must be in default mode, not scientific, programmer etc. Otherwise, the test will fail.
+ *   </li>
+ *   <li>
+ *     Windows Calculator must be in default mode, not scientific, programmer etc. Otherwise, the test will fail.
+ *   </li>
+ * </ul>
  */
-
 @Requires({ os.windows && sys["geb.env"] == "win_app" })
 class CalculatorIT extends GebReportingSpec {
 

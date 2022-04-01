@@ -26,6 +26,7 @@ System.setProperty("geb.env.lang", envLang)
 System.setProperty("geb.env", browser)
 //System.setProperty("geb.env.lang", "XY")
 println "Finished evaluating GebConfig"
+new Exception().printStackTrace(System.out)
 
 def correctBrowser(String browser) {
   return browser

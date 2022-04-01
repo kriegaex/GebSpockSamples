@@ -29,7 +29,7 @@ class SampleGebIT extends GebReportingSpec {
   }
 
   // We cannot use 'specificationContext' directly from 'setupSpec()' because of this
-  // compilation errorInfoInfo: "Only @Shared and static fields may be accessed from here"
+  // compilation error: "Only @Shared and static fields may be accessed from here"
   // Okay then, so use we a @Shared field as a workaround. ;-)
   @Shared
   def currentSpec = specificationContext.currentSpec
