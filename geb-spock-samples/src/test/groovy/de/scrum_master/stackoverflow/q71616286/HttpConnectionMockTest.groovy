@@ -2,6 +2,8 @@ package de.scrum_master.stackoverflow.q71616286
 
 import spock.lang.Specification
 
+import java.net.Proxy  // Do not remove! https://github.com/groovy/groovy-eclipse/issues/1354
+
 class HttpConnectionMockTest extends Specification {
   def test() {
     given: "a mock connection manager, returning a mock connection with a predefined response code"
