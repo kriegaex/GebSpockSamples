@@ -9,6 +9,6 @@ class GitHubHealthCheckIT extends GebReportingSpec {
     go "https://www.githubstatus.com/api/v2/status.json"
 
     expect:
-    driver.pageSource =~ /"status":.*"All Systems Operational"/
+    driver.pageSource =~ /githubstatus.com",.*,"status":/
   }
 }
