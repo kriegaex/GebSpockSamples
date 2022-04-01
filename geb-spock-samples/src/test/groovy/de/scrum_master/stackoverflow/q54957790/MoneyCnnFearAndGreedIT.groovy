@@ -1,9 +1,11 @@
 package de.scrum_master.stackoverflow.q54957790
 
 import geb.spock.GebReportingSpec
+import spock.lang.Ignore
 import spock.lang.Issue
 
 @Issue("https://stackoverflow.com/a/54958984/1082681")
+@Ignore("flaky, CNN website is volatile")
 class MoneyCnnFearAndGreedIT extends GebReportingSpec {
   def test() {
     given:
