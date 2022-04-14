@@ -96,13 +96,13 @@ jobs:
       # No matter if a preceding test run failed or not, try to generate and upload a test report
       # TODO: these steps should only happen if at least the build without tests passed, not always
 
-      - name: Generate aggregate test report
+      - name: Generate aggregate test reports
         if: always()
-        run: mvn --batch-mode -P github -Daggregate=true surefire-report:report-only
+        run: mvn --batch-mode -P github -Daggregate=true surefire-report:report-only surefire-report:failsafe-report-only
 
       - name: Attach aggregate test report to build
         if: always()
         uses: actions/upload-artifact@v2
         with:
           name: surefire-report-${{ matrix.os }}-java${{ matrix.javaVersion }}-${{ matrix.gebEnv }}
-          path: target/site/surefire-report.html
+          path: target/site/*-report.html
