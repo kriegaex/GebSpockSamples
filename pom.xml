@@ -55,7 +55,7 @@
     <version.jmockit>1.46</version.jmockit>
     <version.sarek>1.0-SNAPSHOT</version.sarek>
     <!-- TODO: keep up to date with Sarek's version -->
-    <version.byte-buddy>1.12.8</version.byte-buddy>
+    <version.byte-buddy>1.12.9</version.byte-buddy>
     <!--
       Surefire 2.20+ creates dump files containing native log output, which is really annoying. So we stick with the
       latest version which does not create dump files, but correctly prints native output to the console.
