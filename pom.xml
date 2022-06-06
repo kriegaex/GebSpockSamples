@@ -739,10 +739,10 @@
       <groupId>io.appium</groupId>
       <artifactId>java-client</artifactId>
       <!--
-        7.6.0 ist the latest version supporting Selenium 3. Version 8.0.0 needs Selenium 4,
+        8.1.1 ist the latest version supporting Selenium 3. Version 8.0.0 needs Selenium 4,
         and for that we need a Geb version supporting Selenium 4.
       -->
-      <version>7.6.0</version>
+      <version>8.1.1</version>
       <scope>test</scope>
     </dependency>
 
