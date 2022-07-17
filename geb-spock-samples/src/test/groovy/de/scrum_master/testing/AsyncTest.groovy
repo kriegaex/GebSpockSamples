@@ -29,7 +29,6 @@ class AsyncTest extends Specification {
   def "use PollingConditions"() {
     given:
     boolean finished
-    def conditions = new PollingConditions(timeout: TIMEOUT_SECS)
 
     when:
     Thread.start {
@@ -38,16 +37,17 @@ class AsyncTest extends Specification {
     }
 
     then:
-    conditions.eventually {
-      // We *have* to use 'assert' here! This is *not* a 'then:' block!
-      assert finished
+    new PollingConditions(timeout: TIMEOUT_SECS).eventually {
+      // No need to use 'assert', unless 'PollingConditions' is assigned via 'def' instead of explicit type
+      finished
     }
   }
 
   def "use AsyncConditions"() {
     given:
     boolean finished
-    def conditions = new AsyncConditions()
+    // Avoid the need to use 'assert' by helping the Groovy compiler, specifying an explicit type instead of using 'def'
+    AsyncConditions conditions = new AsyncConditions()
 
     when:
     Thread.start {
@@ -55,8 +55,7 @@ class AsyncTest extends Specification {
       finished = true
       // This is a bit contrived here and better suited for callbacks
       conditions.evaluate {
-        // We *have* to use 'assert' here! This is *not* a 'then:' block!
-        assert finished
+        finished
       }
     }
 
