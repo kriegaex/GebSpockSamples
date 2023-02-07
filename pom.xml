@@ -34,7 +34,7 @@
 
     <!-- Groovy compiler for Spock/Geb tests -->
     <version.groovy-eclipse-compiler>3.7.1</version.groovy-eclipse-compiler>
-    <version.groovy-eclipse-batch>2.5.16-02</version.groovy-eclipse-batch>
+    <version.groovy-eclipse-batch>4.0.9-02</version.groovy-eclipse-batch>
 
     <!-- Geb, Selenium -->
     <!--
