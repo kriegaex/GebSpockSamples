@@ -63,7 +63,6 @@ in the test resources. Currently we have these:
   full-featured browser engine. Make sure that FF is installed locally.
 * `chrome` - Google Chrome in normal (non-headless) mode. Make sure that Chrome is installed locally.
 * `firefox` - Mozilla Firefox in normal (non-headless) mode. Make sure that FF is installed locally.
-* `ie` - Microsoft Internet Explorer. Make sure that IE is installed locally.
 * `edge` - Microsoft Edge. Make sure that Edge is installed locally.
 * `opera` - Opera. Make sure that Opera (Chromium-based current version, not legacy engine) is installed locally.
 * `win_app` - Appium Windows driver (used for Windows Calculator demo test)

@@ -34,13 +34,13 @@
 
     <!-- Groovy compiler for Spock/Geb tests -->
     <version.groovy-eclipse-compiler>3.7.1</version.groovy-eclipse-compiler>
-    <version.groovy-eclipse-batch>2.5.16-02</version.groovy-eclipse-batch>
+    <version.groovy-eclipse-batch>2.5.18-01</version.groovy-eclipse-batch>
 
     <!-- Geb, Selenium -->
     <!--
       Possible geb.env values:
         * Headless browsers: html_unit, chrome_headless, firefox_headless
-        * Regular browsers: chrome, firefox, ie, edge, opera
+        * Regular browsers: chrome, firefox, edge, opera
         * Others: win_app
     -->
     <geb.env>chrome_headless</geb.env>
@@ -314,17 +314,19 @@
                   Needs to be inactive for IDEA, but active for Failsafe.
                   Otherwise arguments for Surefire and Failsafe appear 2x on the command line.
               -->
+<!--
               -Dfile.encoding=UTF8
-              <!-- Help libraries using restricted JDK APIs on JDK 9+ (mostly 16+) -->
+              &lt;!&ndash; Help libraries using restricted JDK APIs on JDK 9+ (mostly 16+) &ndash;&gt;
               ${jvm.arg.addOpens}
-              <!-- Help Java find native libraries for JNI tests -->
+              &lt;!&ndash; Help Java find native libraries for JNI tests &ndash;&gt;
               -Djava.library.path=${basedir}/src/main/resources/lib
-              <!--
+              &lt;!&ndash;
                 Not really necessary. The default target bytecode level in Groovy 2.5.x is 1.7.
                 This setting influences e.g. EmbeddedSpecRunner or other dynamically compiled code.
-              -->
+              &ndash;&gt;
               -Dgroovy.target.bytecode=${maven.compiler.target}
               -javaagent:"${settings.localRepository}"/org/jmockit/jmockit/${version.jmockit}/jmockit-${version.jmockit}.jar
+-->
             </argLine>
           </configuration>
           <executions>
@@ -535,6 +537,10 @@
           <exclusion>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-all</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>com.sun</groupId>
+            <artifactId>tools</artifactId>
           </exclusion>
         </exclusions>
       </dependency>
@@ -833,6 +839,14 @@
     <dependency>
       <groupId>org.codehaus.groovy.modules.http-builder</groupId>
       <artifactId>http-builder</artifactId>
+    </dependency>
+
+    <!-- https://stackoverflow.com/q/74575745/1082681 -->
+    <dependency>
+      <groupId>com.squareup.okhttp3</groupId>
+      <artifactId>okhttp</artifactId>
+      <!-- Do not upgrade to 4.x or newer, test uses 3.x API -->
+      <version>3.12.13</version>
     </dependency>
 
   </dependencies>

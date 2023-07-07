@@ -11,8 +11,8 @@ import spock.lang.Ignore
  * For the negative test (pop-up shown with deactivated special browser settings) please make sure that for nzz.ch the
  * pop-up was not blocked yet in the browser settings, otherwise please reset it before running the test.
  *
- * Currently there are special driver settings for Chrome, Chrome Headless and Opera. Edge and IE do not show any
- * pop-ups, PhantomJS works normally,too.
+ * Currently there are special driver settings for Chrome, Chrome Headless and Opera. Edge does not show any pop-ups,
+ * PhantomJS works normally,too.
  */
 
 @Ignore

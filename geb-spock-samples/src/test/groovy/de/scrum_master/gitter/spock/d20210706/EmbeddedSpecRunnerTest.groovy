@@ -1,13 +1,17 @@
 package de.scrum_master.gitter.spock.d20210706
 
-import spock.lang.Requires
+import spock.lang.Issue
 import spock.lang.Specification
 import spock.util.EmbeddedSpecRunner
 
 // Groovy 2.5.15 does not support Java 16+ class files, because it embeds ASM 8.0.1.
 // See also https://issues.apache.org/jira/browse/GROOVY-10503 and https://github.com/apache/groovy/pull/1690.
-// TODO: Remove '@Requires' after a new Groovy 2.5.x version fixing the above issue has been released.
-@Requires({ Integer.parseInt(System.getProperty("java.version").replaceAll("[.].*", "")) < 16 })
+// Since 2.5.18, '@Requires' is no longer necessary.
+// @Requires({ Integer.parseInt(System.getProperty("java.version").replaceAll("[.].*", "")) < 16 })
+@Issue([
+  "https://issues.apache.org/jira/browse/GROOVY-10503",
+  "https://issues.apache.org/jira/browse/GROOVY-10656"
+])
 class EmbeddedSpecRunnerTest extends Specification {
   def test() {
     given:
